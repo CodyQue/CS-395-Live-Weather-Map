@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'live_weather_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -102,6 +103,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
+
+GOOGLE_API_KEY = 'AIzaSyA7oKIPQ3FnLy-y4iQjcbobvTaQFAVO-gE'
 
 LANGUAGE_CODE = 'en-us'
 
