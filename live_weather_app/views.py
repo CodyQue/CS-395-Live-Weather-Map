@@ -7,6 +7,8 @@ from django.urls import reverse
 import requests
 import json
 from datetime import datetime
+# Imports for weather advisor
+import numpy as np
 
 class travel_questionnaire(forms.Form):
     temp_opts = [
@@ -14,6 +16,7 @@ class travel_questionnaire(forms.Form):
         ('cold', 'Cold'),
         ('mild', 'Mild'),
     ]
+    max_dist = forms.CharField(label="Max distance (miles)")
     temperature = forms.ChoiceField(label='Temperature', widget=forms.RadioSelect, choices=temp_opts)
 
 
@@ -21,12 +24,15 @@ def map(request):
     return render(request, 'home/index.html')
 
 def travel_advisor(request):
+    ip = request.META.get('REMOTE_ADDR')
+    print(ip)
     if request.method == "POST":
         form = travel_questionnaire(request.POST)
         if form.is_valid():
-            temperature = form.cleaned_data["temperature"]
+            temperature = form.cleaned_data
             print(temperature)
-        return HttpResponse()
+            print()
+        # return HttpResponse()
     return render(request, "home/traveladvisor.html", {"form": travel_questionnaire()})
 
 
