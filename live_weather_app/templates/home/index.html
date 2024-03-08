@@ -5,9 +5,29 @@
   <title>Live Weather Radar / Predictor</title>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oKIPQ3FnLy-y4iQjcbobvTaQFAVO-gE&libraries=places&callback=initMap"></script>
   <script src="{% static 'index.js' %}" defer></script>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
 </head>
 <body>
-  <h3>CS 395: Live Weather Radar / Predictor</h3>
-  <div id="map" style="height: 93%; width: 75%"></div>
+  <div class = 'container' style = "height: 100%; margin-left: 1vw;">
+    <div class = 'row'>
+      <div class = 'col-5'>
+        <h3>CS 395: Live Weather Radar / Predictor</h3>
+      </div>
+    </div>
+    <div class = 'row' style="height: 95vh; width: 90vw">
+      <div class = 'col-9'>
+        <div id="map" style="height: 90vh; width: 65vw"></div>
+      </div>
+      <div class = 'col-3'>
+        <h1><b>{{ city_weather_update.city}}</b></h1>
+        <h3><b>Description: </b>{{ city_weather_update.description}}</h3>
+        <h3><b>Temperature: </b>{{ city_weather_update.temperature}}</h3>
+        <h3><b>Wind: </b>{{ city_weather_update.wind}}</h3>
+        <h3><b>Humidity: </b>{{ city_weather_update.humidity}}</h3>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
