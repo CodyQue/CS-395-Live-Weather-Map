@@ -26,8 +26,15 @@ def get_geolocation():
     resp = requests.get(url)
     return resp.json()["city"]["name"]
 
+def get_meters(miles):
+    return round(miles*1609.34)
+
 def get_places(city, category, max_dist):
-    url = ""
+    apiKey = "09008c734555433dbf212c6c61ebea3b"
+    url = f"https://api.geoapify.com/v2/places?categories={category}&distance={get_meters(max_dist)}&limit=5&apiKey={apiKey}"
+    resp = requests.get(url)
+    return resp.json()
+    
 
 def travel_advisor(request):
     ip = request.META.get('REMOTE_ADDR')
@@ -39,7 +46,8 @@ def travel_advisor(request):
             city = get_geolocation()
             max_dist = form.cleaned_data["max_dist"]
             category = form.cleaned_data["category"]
-            print(city, max_dist, category)
+            resp = get_places(city, category, int(max_dist))
+            print(resp)
         # return HttpResponse()
     return render(request, "home/traveladvisor.html", {"form": travel_questionnaire()})
 
