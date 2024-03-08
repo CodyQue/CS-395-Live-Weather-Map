@@ -7,8 +7,6 @@ from django.urls import reverse
 import requests
 import json
 from datetime import datetime
-# Imports for weather advisor
-import numpy as np
 
 class travel_questionnaire(forms.Form):
     temp_opts = [
