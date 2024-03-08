@@ -24,14 +24,18 @@ class travel_questionnaire(forms.Form):
 def get_geolocation():
     url = "https://api.geoapify.com/v1/ipinfo?&apiKey=09008c734555433dbf212c6c61ebea3b"
     resp = requests.get(url)
-    return resp.json()["city"]["name"]
+    return [resp.json()["location"]["latitude"], resp.json()["location"]["longitude"]]
 
 def get_meters(miles):
     return round(miles*1609.34)
 
-def get_places(city, category, max_dist):
+def get_places(lat, lon, category, max_dist):
     apiKey = "09008c734555433dbf212c6c61ebea3b"
-    url = f"https://api.geoapify.com/v2/places?categories={category}&distance={get_meters(max_dist)}&limit=5&apiKey={apiKey}"
+    url = "https://api.geoapify.com/v2/places"
+    params = {
+        "categories": category,
+        "limit": 5,
+    }
     resp = requests.get(url)
     return resp.json()
     
@@ -43,10 +47,10 @@ def travel_advisor(request):
         form = travel_questionnaire(request.POST)
         if form.is_valid():
             categories = form.cleaned_data
-            city = get_geolocation()
+            loc = get_geolocation()
             max_dist = form.cleaned_data["max_dist"]
             category = form.cleaned_data["category"]
-            resp = get_places(city, category, int(max_dist))
+            resp = get_places(loc[0], loc[1], category, int(max_dist))
             print(resp)
         # return HttpResponse()
     return render(request, "home/traveladvisor.html", {"form": travel_questionnaire()})
