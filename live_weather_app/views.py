@@ -8,18 +8,26 @@ import requests
 import json
 from datetime import datetime
 
+
 class travel_questionnaire(forms.Form):
     temp_opts = [
-        ('hot', 'Hot'),
-        ('cold', 'Cold'),
-        ('mild', 'Mild'),
+        ('accomodation', 'Hotels'),
+        ('activity', 'Activities'),
+        ('commercial', 'Shopping'),
+        ('catering', 'Restaurants'),
+        ('tourism', 'Tourism')
     ]
     max_dist = forms.CharField(label="Max distance (miles)")
-    temperature = forms.ChoiceField(label='Temperature', widget=forms.RadioSelect, choices=temp_opts)
+    category = forms.ChoiceField(label='Category', widget=forms.RadioSelect, choices=temp_opts)
 
 
-def map(request):
-    return render(request, 'home/index.html')
+def get_geolocation():
+    url = "https://api.geoapify.com/v1/ipinfo?&apiKey=09008c734555433dbf212c6c61ebea3b"
+    resp = requests.get(url)
+    return resp.json()["city"]["name"]
+
+def get_places(city, category, max_dist):
+    url = ""
 
 def travel_advisor(request):
     ip = request.META.get('REMOTE_ADDR')
@@ -27,9 +35,11 @@ def travel_advisor(request):
     if request.method == "POST":
         form = travel_questionnaire(request.POST)
         if form.is_valid():
-            temperature = form.cleaned_data
-            print(temperature)
-            print()
+            categories = form.cleaned_data
+            city = get_geolocation()
+            max_dist = form.cleaned_data["max_dist"]
+            category = form.cleaned_data["category"]
+            print(city, max_dist, category)
         # return HttpResponse()
     return render(request, "home/traveladvisor.html", {"form": travel_questionnaire()})
 
