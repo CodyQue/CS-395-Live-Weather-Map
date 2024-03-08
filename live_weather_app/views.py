@@ -19,7 +19,7 @@ class travel_questionnaire(forms.Form): # maybe add more categories?
         ('catering', 'Restaurants'),
         ('tourism', 'Tourism')
     ]
-    max_dist = forms.CharField(label="Max distance (upper: 30 miles)")
+    max_dist = forms.CharField(label="Max distance (miles)")
     category = forms.ChoiceField(label='Category', widget=forms.RadioSelect, choices=temp_opts)
 
 
@@ -43,22 +43,21 @@ def get_places(lat, lon, category, max_dist):
 
 def travel_advisor(request):
     i = 0
+    list_places = {}
     if request.method == "POST":
         form = travel_questionnaire(request.POST)
         if form.is_valid():
-            # loc = get_geolocation()
+            loc = get_geolocation()
             max_dist = form.cleaned_data["max_dist"]
             category = form.cleaned_data["category"]
-            resp = get_places(38.9512721, -77.5241609, category, int(max_dist))
+            resp = get_places(loc[0], loc[1], category, int(max_dist))
             feat = resp["features"]
             for i in range(len(feat)): # responses are not normalized, for now, just ignore if not returned in expected manner.
                 try:
-                    print(feat[i]["properties"]["name"])
+                    list_places[i] = feat[i]["properties"]["name"]
+                    print(list_places[i])
                 except KeyError:
                     continue
-            # for i in get_places(loc[0], loc[1], category, int(max_dist))["features"]:
-            # for i in resp:
-            #     print(i["properties"]["name"])
         else:
             form = travel_questionnaire()
     return render(request, "home/traveladvisor.html", {"form": travel_questionnaire()})

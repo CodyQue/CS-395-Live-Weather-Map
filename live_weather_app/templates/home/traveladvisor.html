@@ -14,5 +14,10 @@
         <button type="submit">Submit!</button>
         </form>
     </div>
+    <div class="places">
+        {% for place in list_places %}
+        <div class="place-span">place: {{ list_places.place }}</div>
+        {% endfor %}
+    </div>
 </body>
 </html>
