@@ -24,7 +24,7 @@ def map(request):
         'country_code': response['sys']['country'],
         'wind': str(response['wind']['speed']) + 'km/h',
         'humidity': str(response['main']['humidity']) + '%',
-         'time': formatted_time
+        'time': formatted_time
     }
     context = {'city_weather_update': city_weather_update}
     print(context)
