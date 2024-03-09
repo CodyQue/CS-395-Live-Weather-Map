@@ -13,7 +13,7 @@ class travel_questionnaire(forms.Form): # maybe add more categories?
     # idea for ML: have user enter category without options, use sklearn to 
     # match user entry to closest option the api takes. 
     temp_opts = [
-        ('accomodation', 'Hotels'),
+        ('accommodation', 'Hotels'),
         ('activity', 'Activities'),
         ('commercial', 'Shopping'),
         ('catering', 'Restaurants'),
