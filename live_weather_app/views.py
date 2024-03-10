@@ -35,7 +35,6 @@ def get_places(lat, lon, category, max_dist):
     limit = 10
     apiKey = "09008c734555433dbf212c6c61ebea3b"
     max_dist = get_meters(max_dist)
-    print(max_dist)
     url = f"https://api.geoapify.com/v2/places?categories={category}&filter=circle:{lon},{lat},{max_dist}&bias=proximity:{lon},{lat}&limit={limit}&apiKey={apiKey}"
     resp = requests.get(url)
     return resp.json()
@@ -43,7 +42,7 @@ def get_places(lat, lon, category, max_dist):
 
 def travel_advisor(request):
     i = 0
-    list_places = {}
+    list_places = []
     if request.method == "POST":
         form = travel_questionnaire(request.POST)
         if form.is_valid():
@@ -54,12 +53,13 @@ def travel_advisor(request):
             feat = resp["features"]
             for i in range(len(feat)): # responses are not normalized, for now, just ignore if not returned in expected manner.
                 try:
-                    list_places[i] = feat[i]["properties"]["name"]
-                    print(list_places[i])
+                    list_places.append(feat[i]["properties"]["name"])
                 except KeyError:
                     continue
-        else:
-            form = travel_questionnaire()
+            print(list_places)
+        return render(request, "home/traveladvisor.html", {"list_places": list_places})
+        # else:
+        #     form = travel_questionnaire()
     return render(request, "home/traveladvisor.html", {"form": travel_questionnaire()})
 
 
