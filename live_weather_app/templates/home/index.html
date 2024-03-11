@@ -13,10 +13,16 @@
   <div class = 'container' style = "height: 100%; margin-left: 1vw;">
     <div class = 'row'>
       <div class = 'col-5'>
-        <h3>CS 395: Live Weather Radar / Predictor</h3>
+        <h3>CS 395: Live Weather Radar</h3>
+        <div class = "button-container">
+          <button>All Features Map</button>
+          <button>Temperature Map</button>
+          <button>Wind Map</button>
+          <button>Humidity Map</button>
+        </div>
       </div>
       <div class = 'col-3'>
-        <form style="margin-top: 5%;" method="post">
+        <form method="post">
           <div id="searchPlace">
               {% csrf_token %}
               <input id="cityInput" name = 'cityInput' placeholder="Enter A Country, City, Or State" type="text"/>
@@ -38,7 +44,7 @@
             ],
             view: new ol.View({
               center: ol.proj.fromLonLat([-77, 38]),
-              zoom: 4
+              zoom: 7
             })
           });
         </script>
