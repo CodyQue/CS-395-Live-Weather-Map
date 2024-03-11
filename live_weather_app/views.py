@@ -8,6 +8,8 @@ import requests
 import json
 from datetime import datetime
 
+class NewCity(forms.Form):
+    cityInput = forms.CharField(label='cityInput', max_length=100)
 
 class travel_questionnaire(forms.Form): # maybe add more categories?
     # idea for ML: have user enter category without options, use sklearn to 
@@ -47,6 +49,7 @@ def travel_advisor(request):
         form = travel_questionnaire(request.POST)
         if form.is_valid():
             loc = get_geolocation()
+            print("Location: ", loc)
             max_dist = form.cleaned_data["max_dist"]
             category = form.cleaned_data["category"]
             resp = get_places(loc[0], loc[1], category, int(max_dist))
@@ -65,21 +68,46 @@ def travel_advisor(request):
 
 def map(request):
     API_KEY = 'cdac524628de1773c07153a946813a62'
-    city_name = 'Fairfax'
-    url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric'
-    response = requests.get(url).json()
-    current_time = datetime.now()
-    formatted_time = current_time.strftime("%A, %B %d %Y, %H:%M:%S %p")
-    city_weather_update = {
-        'city': city_name,
-        'description': response['weather'][0]['description'],
-        'icon': response['weather'][0]['icon'],
-        'temperature': str(response['main']['temp']) + ' °C',
-        'country_code': response['sys']['country'],
-        'wind': str(response['wind']['speed']) + 'km/h',
-        'humidity': str(response['main']['humidity']) + '%',
-        'time': formatted_time
-    }
-    context = {'city_weather_update': city_weather_update}
-    print(context)
-    return render(request, 'home/index.html', context)
+    if request.method == "POST":
+        form = NewCity(request.POST)
+        if form.is_valid():
+            cityInput = form.cleaned_data["cityInput"]
+            city_name = cityInput 
+            print(cityInput)
+            print(form)
+            url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric'
+            response = requests.get(url).json()
+            current_time = datetime.now()
+            formatted_time = current_time.strftime("%A, %B %d %Y, %H:%M:%S %p")
+            city_weather_update = {
+                'city': city_name,
+                'description': response['weather'][0]['description'],
+                'icon': response['weather'][0]['icon'],
+                'temperature': str(response['main']['temp']) + ' °C',
+                'country_code': response['sys']['country'],
+                'wind': str(response['wind']['speed']) + 'km/h',
+                'humidity': str(response['main']['humidity']) + '%',
+                'time': formatted_time
+            }
+            context = {'city_weather_update': city_weather_update}
+            print('MAP POSTED')
+            return render(request, 'home/index.html', context)
+    else:
+        city_name = 'Fairfax'
+        url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric'
+        response = requests.get(url).json()
+        current_time = datetime.now()
+        formatted_time = current_time.strftime("%A, %B %d %Y, %H:%M:%S %p")
+        city_weather_update = {
+            'city': city_name,
+            'description': response['weather'][0]['description'],
+            'icon': response['weather'][0]['icon'],
+            'temperature': str(response['main']['temp']) + ' °C',
+            'country_code': response['sys']['country'],
+            'wind': str(response['wind']['speed']) + 'km/h',
+            'humidity': str(response['main']['humidity']) + '%',
+            'time': formatted_time
+        }
+        context = {'city_weather_update': city_weather_update}
+        print(context)
+        return render(request, 'home/index.html', context)

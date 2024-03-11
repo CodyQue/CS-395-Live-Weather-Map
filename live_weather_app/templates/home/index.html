@@ -3,8 +3,8 @@
 <html>
 <head>
   <title>Live Weather Radar / Predictor</title>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA7oKIPQ3FnLy-y4iQjcbobvTaQFAVO-gE&libraries=places&callback=initMap"></script>
-  <script src="{% static 'index.js' %}" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/ol@v9.0.0/dist/ol.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.0.0/ol.css">
   {% load bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_javascript %}
@@ -15,10 +15,33 @@
       <div class = 'col-5'>
         <h3>CS 395: Live Weather Radar / Predictor</h3>
       </div>
+      <div class = 'col-3'>
+        <form style="margin-top: 5%;" method="post">
+          <div id="searchPlace">
+              {% csrf_token %}
+              <input id="cityInput" name = 'cityInput' value="Enter A City" type="text"/>
+              <button for="cityInput"  type="submit">Search Place</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class = 'row' style="height: 95vh; width: 90vw">
+    <div class = 'row' style="height: 90vh; width: 90vw">
       <div class = 'col-9'>
-        <div id="map" style="height: 90vh; width: 65vw"></div>
+        <div id="map" style="height: 85vh; width: 65vw"></div>
+        <script type = "text/javascript">
+          var map = new ol.Map({
+            target: 'map',
+            layers: [
+              new ol.layer.Tile({
+                source: new ol.source.OSM()
+              })
+            ],
+            view: new ol.View({
+              center: ol.proj.fromLonLat([-77, 38]),
+              zoom: 4
+            })
+          });
+        </script>
       </div>
       <div class = 'col-3'>
         <h1><b>{{ city_weather_update.city}}</b></h1>
