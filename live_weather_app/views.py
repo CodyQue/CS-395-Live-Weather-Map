@@ -89,6 +89,7 @@ def map(request):
                 'time': formatted_time,
                 'lon' : response['coord']['lon'],
                 'lat' : response['coord']['lat'],
+                'iconWeb' : "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png",
             }
             context = {'city_weather_update': city_weather_update}
             print('MAP POSTED')
@@ -111,7 +112,8 @@ def map(request):
             'time': formatted_time,
             'lon' : response['coord']['lon'],
             'lat' : response['coord']['lat'],
+            'iconWeb' : "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png"
         }
         context = {'city_weather_update': city_weather_update}
-        #print(context)
+        print(context)
         return render(request, 'home/index.html', context)

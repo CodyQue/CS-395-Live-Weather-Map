@@ -35,6 +35,11 @@
       <div class = 'col-9'>
         <div id="map" style="height: 85vh; width: 65vw"></div>
         <script type = "text/javascript">
+          /**
+          *
+          * This script is used for display the map, and displaying points on the map
+          *
+          **/
           var map = new ol.Map({
             target: 'map',
             layers: [
@@ -65,7 +70,7 @@
               image: new ol.style.Icon({
                 anchor: [0.2, 0.5],
                 crossOrigin: 'anonymous',
-                src: "https://openweathermap.org/img/wn/02n@2x.png"
+                src: '{{ city_weather_update.iconWeb}}'
               })
             })
           })
