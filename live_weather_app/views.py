@@ -60,10 +60,8 @@ def travel_advisor(request):
                 except KeyError:
                     continue
             print(list_places)
-        return render(request, "home/traveladvisor.html", {"list_places": list_places})
-        # else:
-        #     form = travel_questionnaire()
-    return render(request, "home/traveladvisor.html", {"form": travel_questionnaire()})
+        # return render(request, "home/traveladvisor.html", {"list_places": list_places})
+    return render(request, "home/traveladvisor.html", {"form": travel_questionnaire(), "list_places": list_places})
 
 
 def map(request):
