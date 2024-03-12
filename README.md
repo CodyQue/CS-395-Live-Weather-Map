@@ -8,4 +8,4 @@ https://openweathermap.org/weather-conditions
 
 Libraries to install:
 requests
-s
+django-bootstrap-v5
