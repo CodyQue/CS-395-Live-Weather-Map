@@ -77,6 +77,7 @@ def map(request):
             print(form)
             url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric'
             response = requests.get(url).json()
+            print(response)
             current_time = datetime.now()
             formatted_time = current_time.strftime("%A, %B %d %Y, %H:%M:%S %p")
             city_weather_update = {
@@ -87,7 +88,9 @@ def map(request):
                 'country_code': response['sys']['country'],
                 'wind': str(response['wind']['speed']) + 'km/h',
                 'humidity': str(response['main']['humidity']) + '%',
-                'time': formatted_time
+                'time': formatted_time,
+                'lon' : response['coord']['lon'],
+                'lat' : response['coord']['lat'],
             }
             context = {'city_weather_update': city_weather_update}
             print('MAP POSTED')
@@ -96,6 +99,7 @@ def map(request):
         city_name = 'Fairfax'
         url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric'
         response = requests.get(url).json()
+        print(response)
         current_time = datetime.now()
         formatted_time = current_time.strftime("%A, %B %d %Y, %H:%M:%S %p")
         city_weather_update = {
@@ -106,8 +110,10 @@ def map(request):
             'country_code': response['sys']['country'],
             'wind': str(response['wind']['speed']) + 'km/h',
             'humidity': str(response['main']['humidity']) + '%',
-            'time': formatted_time
+            'time': formatted_time,
+            'lon' : response['coord']['lon'],
+            'lat' : response['coord']['lat'],
         }
         context = {'city_weather_update': city_weather_update}
-        print(context)
+        #print(context)
         return render(request, 'home/index.html', context)

@@ -43,8 +43,8 @@
               })
             ],
             view: new ol.View({
-              center: ol.proj.fromLonLat([-77, 38]),
-              zoom: 7
+              center: ol.proj.fromLonLat(['{{ city_weather_update.lon }}', '{{ city_weather_update.lat }}']),
+              zoom: 13.5
             })
           });
         </script>
