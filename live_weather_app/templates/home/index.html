@@ -57,13 +57,16 @@
               zoom: 13.5
             })
           });
-
-          const marker = new ol.layer.Vector({
+        </script>
+        {% for p in place%}
+        <script>
+          console.log("PRINTED FROM OTHER SCRIPT")
+          map.addLayer(new ol.layer.Vector({
             source: new ol.source.Vector({
               features: [
                 new ol.Feature ({
                   geometry: new ol.geom.Point(
-                    ol.proj.fromLonLat((['{{ city_weather_update.lon }}', '{{ city_weather_update.lat }}']))
+                    ol.proj.fromLonLat((['{{ p.long }}', '{{ p.lat }}']))
                   )
                 })
               ],
@@ -72,12 +75,12 @@
               image: new ol.style.Icon({
                 anchor: [0.2, 0.5],
                 crossOrigin: 'anonymous',
-                src: '{{ city_weather_update.iconWeb}}'
+                src: '{{ p.iconWeb}}'
               })
             })
-          })
-          map.addLayer(marker)
+          }))
         </script>
+        {% endfor %}
       </div>
       <div class = 'col-3'>
         <h1><b>{{ city_weather_update.city}}</b></h1>

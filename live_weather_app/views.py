@@ -7,6 +7,7 @@ from django.urls import reverse
 import requests
 import json
 from datetime import datetime
+from .models import Place
 
 class NewCity(forms.Form):
     cityInput = forms.CharField(label='cityInput', max_length=100)
@@ -114,6 +115,8 @@ def map(request):
             'lat' : response['coord']['lat'],
             'iconWeb' : "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png"
         }
-        context = {'city_weather_update': city_weather_update}
+        context = {
+            'city_weather_update': city_weather_update,
+            "place" : Place.objects.all()}
         print(context)
         return render(request, 'home/index.html', context)
