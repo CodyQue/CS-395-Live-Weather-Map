@@ -12,29 +12,10 @@ from .models import Place
 class NewCity(forms.Form):
     cityInput = forms.CharField(label='cityInput', max_length=100)
 
-class travel_questionnaire(forms.Form): # maybe add more categories?
-    # idea for ML: have user enter category without options, use sklearn to 
-    # match user entry to closest option the api takes. 
-    temp_opts = [
-        ('accommodation', 'Hotels'),
-        ('activity', 'Activities'),
-        ('commercial', 'Shopping'),
-        ('catering', 'Restaurants'),
-        ('tourism', 'Tourism')
-    ]
-    max_dist = forms.IntegerField(label="Max distance")
-    category = forms.ChoiceField(label='Category', widget=forms.RadioSelect, choices=temp_opts)
-
-
 def get_geolocation(): # gets user ip and finds location. 
     url = "https://api.geoapify.com/v1/ipinfo?&apiKey=09008c734555433dbf212c6c61ebea3b"
     resp = requests.get(url)
     return [resp.json()["location"]["latitude"], resp.json()["location"]["longitude"]]
-
-def get_meters(miles): # literally just converts miles to meters. 
-    return round(miles*1609.34)
-
-
 
 def get_weather_info(city):
     API_KEY = 'cdac524628de1773c07153a946813a62'
@@ -59,23 +40,19 @@ def map(request):
     if not request.method == "POST":
         get_weather_info('Fairfax')
 
-    # if request.method == "POST":
     else:
         form = NewCity(request.POST)
         if form.is_valid():
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
+    list_places = travel_advisor()
     context = {
         "city_weather_update": city_weather_update,
         "place" : Place.objects.all(),
-        "travel_adivsor": None
+        "list_places": list_places
     }
     print(context)
-    travel_advisor()
     return render(request, 'home/index.html', context)
-
-def is_nice(temp):
-    return temp > 20
 
 def get_place_id(city):
     url = f"https://api.geoapify.com/v1/geocode/search?text={city}&format=json&apiKey=09008c734555433dbf212c6c61ebea3b"
@@ -84,43 +61,16 @@ def get_place_id(city):
 
 def travel_advisor():
     list_places = []
-    # loc = get_geolocation()
-
-    # curr_temp = float(city_weather_update["temperature"].split()[0])
     curr_city = city_weather_update["city"]
     city_id = get_place_id(curr_city)
     print(city_id)
     resp = get_places(city_id)
     for i in resp["features"]:
         list_places.append(i["properties"]["name"])
-    print(list_places)
-    # if is_nice(curr_temp):
+    return list_places
 
 def get_places(place_id):
     apiKey = "09008c734555433dbf212c6c61ebea3b"
-    # max_dist = get_meters(max_dist)
     url = f"https://api.geoapify.com/v2/places?categories=tourism&filter=place:{place_id}&limit=5&apiKey={apiKey}"
     resp = requests.get(url)
     return resp.json()
-
-'''def travel_advisor2(request):
-    i = 0
-    list_places = []
-    if request.method == "POST":
-        form = travel_questionnaire(request.POST)
-        if form.is_valid():
-            loc = get_geolocation()
-            print("Location: ", loc)
-            max_dist = form.cleaned_data["max_dist"]
-            category = form.cleaned_data["category"]
-            resp = get_places(loc[0], loc[1], category, int(max_dist))
-            feat = resp["features"]
-            for i in range(len(feat)): # responses are not normalized, for now, just ignore if not returned in expected manner.
-                try:
-                    list_places.append(feat[i]["properties"]["name"])
-                except KeyError:
-                    continue
-            print(list_places)
-        # return render(request, "home/traveladvisor.html", {"list_places": list_places})
-    # return render(request, "home/traveladvisor.html", {"form": travel_questionnaire(), "list_places": list_places})
-    '''
