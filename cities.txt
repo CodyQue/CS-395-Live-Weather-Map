@@ -497,18 +497,15 @@ Tianjin
 Shenzhen
 Nanjing
 Chengdu
-Xi-an Shaanxi
 Wuhan
 Hangzhou
 Suzhou
 Shenyang
 Foshan
 Dongguan
-Haerbin
 Dalian
 Qingdao
 Zhengzhou
-Ji-nan Shandong
 Changsha
 Urumqi
 Kunming
@@ -518,13 +515,10 @@ Ningbo
 Shantou
 Shijiazhuang
 Nanning
-Taiyuan Shanxi
 Changzhou
 Nanchang
 Wenzhou
 Xiamen
-Fuzhou Fujian
-Tangshan Hebei
 Guiyang
 Wuxi
 Lanzhou
@@ -543,15 +537,11 @@ Liuzhou
 Baotou
 Xuzhou
 Putian
-Wuhu Anhui
 Yangzhou
-Taizhou Zhejiang
 Baoding
-Linyi Shandong
 Haikou
 Daqing
 Lianyungang
-Yancheng Jiangsu
 Zhuhai
 Quanzhou
 Datong
@@ -567,17 +557,13 @@ Xining
 Hengyang
 Jilin
 Anyang
-Qiqihaer
-Jining Shandong
 Zhangjiakou
 Huainan
 Yiwu
 Chaozhou
 Ganzhou
-Taizhou Jiangsu
 Jiaxing
 Weihai
-Taian Shandong
 Kaifeng
 Liuyang
 Liuan
@@ -587,28 +573,18 @@ Dongying
 Zunyi
 Zhanjiang
 Shiyan
-Mianyang Sichuan
 Tengzhou
 Yingkou
-Suzhou
 Maoming
 Jieyang
-Fushun Liaoning
-Ruian
 Jinhua
 Baoji
-Pingdingshan Henan
 Puning
 Chifeng
 Zhuzhou
-Zhenjiang Jiangsu
-Liupanshui
 Huaibei
-Nanyang Henan
-Xiangtan Hunan
 Pizhou
 Luohe
-Xiongan
 Jinzhou
 Benxi
 Binzhou
@@ -621,14 +597,11 @@ Zaozhuang
 Fuyang
 Panjin
 Ma'anshan
-Fuzhou Jiangxi
 Shangrao
 Zhaoqing
-Yichun Jiangxi
 Chenzhou
 Leshan
 Dezhou
-Jingzhou Hubei
 Changshu
 Huzhou
 Xuchang
@@ -637,11 +610,9 @@ Yueyang
 Guiping
 Xintai
 Chengde
-Pingxiang Jiangxi
 Zhucheng
 Leiyang
 Laiwu
-Jixi Heilongjiang
 Jiujiang
 Mudanjiang
 Guigang
@@ -661,7 +632,6 @@ Changzhi
 Changde
 Liaoyang
 Shangqiu
-Kuerle
 Xingtai
 Quzhou
 Huangshi
@@ -695,7 +665,6 @@ Jiaozuo
 Anqing
 Linhai
 Shaoguan
-Erduosi-Ordoss
 Yan'an
 Dengzhou
 Zigong
@@ -708,16 +677,13 @@ Tongliao
 Tongling
 Wuzhou
 Dazhou
-Suining Sichuan
 Jiamusi
 Dongtai
 Zhangjiagang
-Xianyang Shaanxi
 Panzhihua
 Santiago
 Valparaiso
 Concepcion
-N-Djamena
 Bangui
 Toronto
 Montreal
@@ -748,10 +714,7 @@ Campinas
 Goiania
 Belem
 Manaus
-Grande Vitoria
-Baixada Santista
 Natal
-Grande Sao Luis
 Joao Pessoa
 Maceio
 Joinville
