@@ -10,13 +10,17 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
 </head>
 <body>
     <div class="container form">
-        <form  method="post" style="margin-top: 5%;">
+        <form method="post" style="margin-top: 5%;">
             {% csrf_token %}
-            {{ form }}
-        <button type="submit">Submit!</button>
+            {% bootstrap_form form %}
+            {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" %}
+            <!-- <button type="submit">
+                Submit!
+            </button> -->
         </form>
     </div>
     <div class="container places">

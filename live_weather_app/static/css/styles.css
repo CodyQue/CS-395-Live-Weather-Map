@@ -6,8 +6,14 @@
     height: 100%;
 }
 
-button {
-    border-radius: 5px;
+.btn-primary {
+    background-color: transparent;
+    color: black;
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: black;
 }
 
 a {
@@ -18,7 +24,6 @@ a {
 /* 
    * Optional: Makes the sample page fill the window. 
    */
-html,
 body {
     height: 100%;
     margin: 0;
