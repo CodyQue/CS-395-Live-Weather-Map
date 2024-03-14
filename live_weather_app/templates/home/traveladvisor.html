@@ -5,16 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Advisor</title>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v9.0.0/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.0.0/ol.css">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}" />
 </head>
 <body>
-    <div class="create">
-        <form  method="post" style="margin-top: 5%;">
+    <div class="container form">
+        <form method="post" style="margin-top: 5%;">
             {% csrf_token %}
-            {{ form }}
-        <button type="submit">Submit!</button>
+            {% bootstrap_form form %}
+            {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" %}
+            <!-- <button type="submit">
+                Submit!
+            </button> -->
         </form>
     </div>
-    <div class="places">
+    <div class="container places">
         {% for place in list_places %}
         <div class="place-span">place: {{ place }}</div>
         {% endfor %}

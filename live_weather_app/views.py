@@ -22,7 +22,7 @@ class travel_questionnaire(forms.Form): # maybe add more categories?
         ('catering', 'Restaurants'),
         ('tourism', 'Tourism')
     ]
-    max_dist = forms.CharField(label="Max distance (miles)")
+    max_dist = forms.IntegerField(label="Max distance")
     category = forms.ChoiceField(label='Category', widget=forms.RadioSelect, choices=temp_opts)
 
 
