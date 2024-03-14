@@ -64,59 +64,35 @@ def travel_advisor(request):
         # return render(request, "home/traveladvisor.html", {"list_places": list_places})
     return render(request, "home/traveladvisor.html", {"form": travel_questionnaire(), "list_places": list_places})
 
+def get_weather_info(city):
+    API_KEY = 'cdac524628de1773c07153a946813a62'
+    url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric'
+    response = requests.get(url).json()
+    global city_weather_update 
+    city_weather_update = {
+        'city': city,
+        'description': response['weather'][0]['description'],
+        'icon': response['weather'][0]['icon'],
+        'temperature': str(response['main']['temp']) + ' °C',
+        'country_code': response['sys']['country'],
+        'wind': str(response['wind']['speed']) + 'km/h',
+        'humidity': str(response['main']['humidity']) + '%',
+        'time': datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p"),
+        'lon' : response['coord']['lon'],
+        'lat' : response['coord']['lat'],
+        'iconWeb' : "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png",
+    }
 
 def map(request):
-    API_KEY = 'cdac524628de1773c07153a946813a62'
+    get_weather_info('Fairfax')
+
     if request.method == "POST":
         form = NewCity(request.POST)
         if form.is_valid():
             cityInput = form.cleaned_data["cityInput"]
-            city_name = cityInput 
-            print(cityInput)
-            print(form)
-            url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric'
-            response = requests.get(url).json()
-            print(response)
-            current_time = datetime.now()
-            formatted_time = current_time.strftime("%A, %B %d %Y, %H:%M:%S %p")
-            city_weather_update = {
-                'city': city_name,
-                'description': response['weather'][0]['description'],
-                'icon': response['weather'][0]['icon'],
-                'temperature': str(response['main']['temp']) + ' °C',
-                'country_code': response['sys']['country'],
-                'wind': str(response['wind']['speed']) + 'km/h',
-                'humidity': str(response['main']['humidity']) + '%',
-                'time': formatted_time,
-                'lon' : response['coord']['lon'],
-                'lat' : response['coord']['lat'],
-                'iconWeb' : "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png",
-            }
-            context = {'city_weather_update': city_weather_update}
-            print('MAP POSTED')
-            return render(request, 'home/index.html', context)
-    else:
-        city_name = 'Fairfax'
-        url = f'https://api.openweathermap.org/data/2.5/weather?q={city_name}&appid={API_KEY}&units=metric'
-        response = requests.get(url).json()
-        print(response)
-        current_time = datetime.now()
-        formatted_time = current_time.strftime("%A, %B %d %Y, %H:%M:%S %p")
-        city_weather_update = {
-            'city': city_name,
-            'description': response['weather'][0]['description'],
-            'icon': response['weather'][0]['icon'],
-            'temperature': str(response['main']['temp']) + ' °C',
-            'country_code': response['sys']['country'],
-            'wind': str(response['wind']['speed']) + 'km/h',
-            'humidity': str(response['main']['humidity']) + '%',
-            'time': formatted_time,
-            'lon' : response['coord']['lon'],
-            'lat' : response['coord']['lat'],
-            'iconWeb' : "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png"
-        }
-        context = {
-            'city_weather_update': city_weather_update,
-            "place" : Place.objects.all()}
-        print(context)
-        return render(request, 'home/index.html', context)
+            get_weather_info(cityInput)
+    context = {
+        "city_weather_update": city_weather_update,
+        "place" : Place.objects.all()}
+    print(context)
+    return render(request, 'home/index.html', context)
