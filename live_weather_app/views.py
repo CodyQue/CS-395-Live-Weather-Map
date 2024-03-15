@@ -63,10 +63,13 @@ def travel_advisor():
     list_places = []
     curr_city = city_weather_update["city"]
     city_id = get_place_id(curr_city)
-    print(city_id)
     resp = get_places(city_id)
+    print(json.dumps(resp, indent=2))
     for i in resp["features"]:
-        list_places.append(i["properties"]["name"])
+        try:
+            list_places.append(i["properties"]["name"])
+        except KeyError:
+            continue
     return list_places
 
 def get_places(place_id):
