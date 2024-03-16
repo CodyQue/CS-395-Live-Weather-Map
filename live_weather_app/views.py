@@ -51,7 +51,7 @@ def map(request):
         "place" : Place.objects.all(),
         "list_places": list_places
     }
-    print(context)
+    #print(context)
     return render(request, 'home/index.html', context)
 
 def get_place_id(city):
