@@ -14,12 +14,7 @@
     <div class = 'row'>
       <div class = 'col-5'>
         <h3>CS 395: Live Weather Radar</h3>
-        <div class = "button-container">
-          <button>All Features Map</button>
-          <button>Temperature Map</button>
-          <button>Wind Map</button>
-          <button>Humidity Map</button>
-        </div>
+        <h5>Last Updated: {{ date.date }}</h5>
       </div>
       <div class = 'col-3'>
         <form method="post">
@@ -31,9 +26,9 @@
         </form>
       </div>
     </div>
-    <div class = 'row' style="height: 90vh; width: 90vw">
+    <div class = 'row' style="height: 90vh; width: 85vw">
       <div class = 'col-9'>
-        <div id="map" style="height: 85vh; width: 65vw"></div>
+        <div id="map" style="height: 85vh; width: 100%"></div>
         <script type = "text/javascript">
           /**
           *

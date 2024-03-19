@@ -14,11 +14,6 @@ def scrapeInfoToDB():
         print('Start')
         connection = sqlite3.connect("db.sqlite3")
         cur = connection.cursor()
-        deleteFromTimesTable = '''UPDATE live_weather_app_lasttimeupdated
-        SET date = ?
-        WHERE id = 1''' #Updates last time the database was updated
-        project = datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p")
-        cur.execute(deleteFromTimesTable, (project,))
         count = 0
         with open('cities.txt', 'r', encoding='utf-8') as file:
             reader = file.readlines()
@@ -58,6 +53,11 @@ def scrapeInfoToDB():
                     time.sleep(60)
                     #print("Wake up")
                     count = 0
+        deleteFromTimesTable = '''UPDATE live_weather_app_lasttimeupdated
+        SET date = ?
+        WHERE id = 1''' #Updates last time the database was updated
+        project = datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p")
+        cur.execute(deleteFromTimesTable, (project,))
         time.sleep(120)
         connection.close()
         print("GOES AGAIN")

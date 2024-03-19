@@ -7,7 +7,7 @@ from django.urls import reverse
 import requests
 import json
 from datetime import datetime
-from .models import Place
+from .models import Place, lastTimeUpdated
 
 class NewCity(forms.Form):
     cityInput = forms.CharField(label='cityInput', max_length=100)
@@ -49,9 +49,11 @@ def map(request):
     context = {
         "city_weather_update": city_weather_update,
         "place" : Place.objects.all(),
-        "list_places": list_places
+        "list_places": list_places,
+        "date": lastTimeUpdated.objects.all().first()
     }
     #print(context)
+    print("Last Updated: ", lastTimeUpdated.objects.all().first())
     return render(request, 'home/index.html', context)
 
 def get_place_id(city):
