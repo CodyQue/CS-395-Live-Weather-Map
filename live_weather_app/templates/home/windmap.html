@@ -13,7 +13,7 @@
   <div class = 'container' style = "height: 100%; margin-left: 1vw;">
     <div class = 'row'>
       <div class = 'col-5'>
-        <h3>CS 395: Live Weather Radar (Temperature Map)</h3>
+        <h3>CS 395: Live Weather Radar (Wind Map)</h3>
         <h5>Last Updated: {{ date.date }}</h5>
       </div>
       <div class = 'col-3'>
@@ -53,7 +53,7 @@
         </script>
         {% for p in place%}
         <script>
-          console.log("PRINTED FROM OTHER SCRIPT")
+          console.log("WINDMAP")
           map.addLayer(new ol.layer.Vector({
             source: new ol.source.Vector({
               features: [
@@ -66,9 +66,9 @@
             }),
             style: new ol.style.Style({
               image: new ol.style.Icon({
-                anchor: [0.2, 0.5],
+                anchor: [0.1, 0.3],
                 crossOrigin: 'anonymous',
-                src: '{{ p.iconWeb}}'
+                src: "{% static 'strongwind.png' %}"
               })
             })
           }))

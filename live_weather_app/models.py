@@ -11,6 +11,7 @@ class Place(models.Model):
     lat = models.CharField(max_length = 20, default = "40")
     long = models.CharField(max_length = 20, default = "-74")
     lastUpdated = models.CharField(max_length = 100, default = "00:00:00") 
+    windIcon = models.CharField(max_length=100, default = "strongwind.png")
     
     def __str__ (self):
         return f"Name: {self.name}, Description: {self.description}, Temperature: {self.temperature}, Wind: { self.wind }, Humidity: { self.humidity}, Icon: { self.iconWeb}, Lat: {self.lat}, Long: {self.long}"
