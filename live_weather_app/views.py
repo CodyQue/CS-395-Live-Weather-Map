@@ -48,11 +48,15 @@ def map(request):
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
     list_places = travel_advisor()
+    #print("List places: ", len(list_places))
+    if len(list_places) == 0:
+        list_places.append("None")
     context = {
         "city_weather_update": city_weather_update,
         "place" : Place.objects.all(),
         "list_places": list_places,
-        "date": lastTimeUpdated.objects.all().first()
+        "date": lastTimeUpdated.objects.all().first(),
+        "mapType" : 'Temperature'
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
@@ -60,7 +64,6 @@ def map(request):
 
 # Wind map function
 def windmap(request):
-    print(os.getcwd())
     if not request.method == "POST":
         get_weather_info('Fairfax')
 
@@ -70,11 +73,14 @@ def windmap(request):
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
     list_places = travel_advisor()
+    if len(list_places) == 0:
+        list_places.append("None")
     context = {
         "city_weather_update": city_weather_update,
         "place" : Place.objects.all(),
         "list_places": list_places,
-        "date": lastTimeUpdated.objects.all().first()
+        "date": lastTimeUpdated.objects.all().first(),
+        "mapType" : 'Wind'
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())

@@ -1,0 +1,98 @@
+{% load static %}
+
+<html>
+<head>
+  <title>Live Weather Radar / Predictor</title>
+  <script src="https://cdn.jsdelivr.net/npm/ol@v9.0.0/dist/ol.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.0.0/ol.css">
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+    
+    {% block content %}
+    {% endblock %}
+    <div class = 'row' style="transform: translate(5%,0%);position:relative;margin:0;padding:0; width: 90%; ">
+        <div class = 'col-3' style = 'margin-top: 10px;'>
+          <h3><b>CS 395: Live Weather Radar</b></h3>
+          <h5>{{mapType}} Map</h5>
+          <h8>Last Updated: {{ date.date }}</h8>
+        </div>
+        <div class = 'col-6' style = 'text-align: center;'>
+          <form method="post">
+            <div id="searchPlace" style = "width: 100%;">
+                {% csrf_token %}
+                <input id="cityInput" name = 'cityInput' placeholder="Enter A Country, City, Or State" type="text" style = "width: 13vw; margin-top: 10px;" />
+                <button for="cityInput"  type="submit" style = "
+                  background-color: #555555;
+                  border: none;
+                  color: white;
+                  text-align: center;
+                  text-decoration: none;
+                  display: inline-block;
+                  font-size: 16px;
+                ">Search Place</button>
+            </div>
+          </form>
+         </div>
+         <div class = 'col-3' style = 'margin-top: 10px; width: 50vw'>
+            <a href="/">
+                <button type="button" style = "
+                      background-color: #000000; /* Green */
+                        border: none;
+                        color: rgb(255, 255, 255);
+                        padding: 5px 15px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;">
+                    Temperature Map
+                </button>
+            </a>
+            <a href="windmap">
+                <button type="button" style = "
+                      background-color: #555555; /* Green */
+                        border: none;
+                        color: rgb(255, 255, 255);
+                        padding: 5px 15px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;">
+                    Wind Map
+                </button>
+            </a>
+            <a href="windmap">
+                <button type="button" style = "
+                      background-color: #b96300; /* Green */
+                        border: none;
+                        color: rgb(255, 255, 255);
+                        padding: 5px 15px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;">
+                    Humidity Map
+                </button>
+            </a>
+         </div>
+        </div>
+          
+        <div class = 'col-3' Style="transform: translate(0%, 10%); background-image:linear-gradient(rgb(128, 128, 128), white);border-radius: 25px; margin-left: 4%; height: 50vh;">
+          
+          <h1><b>{{ city_weather_update.city}}</b></h1>
+          <h5><b>Description: </b>{{ city_weather_update.description}}</h5>
+          <h5><b>Temperature: </b>{{ city_weather_update.temperature}}</h5>
+          <h5><b>Wind: </b>{{ city_weather_update.wind}}</h5>
+          <h5><b>Humidity: </b>{{ city_weather_update.humidity}}</h5>
+          <h1><b>Places to visit in {{ city_weather_update.city }}</b></h1>
+          {% for l in list_places %}
+            <h5>{{ l }}</h5>
+          {% endfor %}
+        </div>
+  <!--     </div> -->
+     <!--</ div >-->
+    </div>
+  </body>
+  </html>

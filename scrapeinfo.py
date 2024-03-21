@@ -27,7 +27,7 @@ def scrapeInfoToDB():
                 #print(i)
                 try:
                     windIcon = getWindIcon(response['wind']['speed'])
-                    print("WindIcon: ", windIcon)
+                    #print("WindIcon: ", windIcon)
                     sql = '''INSERT INTO live_weather_app_place(name, description, temperature, wind, humidity, iconWeb, lat, long, lastUpdated, windIcon) VALUES(?,?,?,?,?,?,?,?,?,?)'''
                     project = (i, response['weather'][0]['description'], str(response['main']['temp']) + ' °C', str(response['wind']['speed']) + 'km/h', str(response['main']['humidity']) + '%', "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png", response['coord']['lat'], response['coord']['lon'], datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p"), windIcon)
                     cur.execute(sql, project)
@@ -35,9 +35,9 @@ def scrapeInfoToDB():
                 except Exception as e:
                     #print(i, ", ", e)
                     if 'UNIQUE constraint failed:' in str(e):
-                        print("Unique constraint")
+                        #print("Unique constraint")
                         windIcon = getWindIcon(response['wind']['speed'])
-                        print("WindIcon: ", windIcon)
+                        #print("WindIcon: ", windIcon)
                         sql = '''
                         UPDATE live_weather_app_place
                         SET description = ?,
