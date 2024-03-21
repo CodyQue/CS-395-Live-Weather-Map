@@ -8,6 +8,14 @@ import time
 from datetime import datetime
 from multiprocessing import Process
 
+def getWindIcon(item):
+    if item < 12:
+        return 'lightwind.png'
+    elif item >= 12 and item < 39:
+        return 'moderatewind.png'
+    else:
+        return 'strongwind.png'
+
 def scrapeInfoToDB():
     API_KEY = 'cdac524628de1773c07153a946813a62'
     while(True):
@@ -23,13 +31,18 @@ def scrapeInfoToDB():
                 response = requests.get(url).json()
                 #print(i)
                 try:
-                    sql = '''INSERT INTO live_weather_app_place(name, description, temperature, wind, humidity, iconWeb, lat, long, lastUpdated) VALUES(?,?,?,?,?,?,?,?,?)'''
-                    project = (i, response['weather'][0]['description'], str(response['main']['temp']) + ' °C', str(response['wind']['speed']) + 'km/h', str(response['main']['humidity']) + '%', "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png", response['coord']['lat'], response['coord']['lon'], datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p"))
+                    windIcon = getWindIcon(response['wind']['speed'])
+                    #print("WindIcon: ", windIcon)
+                    sql = '''INSERT INTO live_weather_app_place(name, description, temperature, wind, humidity, iconWeb, lat, long, lastUpdated, windIcon) VALUES(?,?,?,?,?,?,?,?,?,?)'''
+                    project = (i, response['weather'][0]['description'], str(response['main']['temp']) + ' °C', str(response['wind']['speed']) + 'km/h', str(response['main']['humidity']) + '%', "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png", response['coord']['lat'], response['coord']['lon'], datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p"), windIcon)
                     cur.execute(sql, project)
                     connection.commit()
                 except Exception as e:
                     #print(i, ", ", e)
                     if 'UNIQUE constraint failed:' in str(e):
+                        #print("Unique constraint")
+                        windIcon = getWindIcon(response['wind']['speed'])
+                        #print("WindIcon: ", windIcon)
                         sql = '''
                         UPDATE live_weather_app_place
                         SET description = ?,
@@ -37,11 +50,12 @@ def scrapeInfoToDB():
                         wind = ?,
                         humidity = ?,
                         iconWeb = ?,
-                        lastUpdated = ?
+                        lastUpdated = ?,
+                        windIcon = ?
                         WHERE name = ?;
                             '''
                         #print("HAS UNIQUE")
-                        project = (response['weather'][0]['description'], str(response['main']['temp']) + ' °C', str(response['wind']['speed']) + 'km/h', str(response['main']['humidity']) + '%', "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png", datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p"), i)
+                        project = (response['weather'][0]['description'], str(response['main']['temp']) + ' °C', str(response['wind']['speed']) + 'km/h', str(response['main']['humidity']) + '%', "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png", datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p"), windIcon, i)
                         cur.execute(sql, project)
                         connection.commit()
                         #print(count)
@@ -78,6 +92,6 @@ def main():
 
 
 if __name__ == '__main__':
-    p1 = Process(target=scrapeInfoToDB)
-    p1.start()
+    #p1 = Process(target=scrapeInfoToDB)
+    #p1.start()
     main()

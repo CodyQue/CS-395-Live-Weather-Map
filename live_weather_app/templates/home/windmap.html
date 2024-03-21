@@ -1,0 +1,52 @@
+{% extends "home/layout.html" %}
+{% load static %}
+
+{% block content %}
+  <div id="map" style="position:absolute;height:100%;width:100%;">
+    <script type = "text/javascript">
+      /**
+      *
+      * This script is used for display the map, and displaying points on the map
+      *
+      **/
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.TileJSON({
+              url: 'https://api.maptiler.com/maps/basic-v2/tiles.json?key=U6osgvYMOlDTHjF5wgGc',
+              tileSize: 512
+            })
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat(['{{ city_weather_update.lon }}', '{{ city_weather_update.lat }}']),
+          zoom: 13.5
+        })
+      });
+    </script>
+    {% for p in place%}
+    <script>
+      console.log("PRINTED FROM OTHER SCRIPT")
+      map.addLayer(new ol.layer.Vector({
+        source: new ol.source.Vector({
+          features: [
+            new ol.Feature ({
+              geometry: new ol.geom.Point(
+                ol.proj.fromLonLat((['{{ p.long }}', '{{ p.lat }}']))
+              )
+            })
+          ],
+        }),
+        style: new ol.style.Style({
+          image: new ol.style.Icon({
+            anchor: [0.2, 0.5],
+            crossOrigin: 'anonymous',
+            src: "{% static p.windIcon %}"
+          })
+        })
+      }))
+    </script>
+    {% endfor %}
+  </div>
+{% endblock %}

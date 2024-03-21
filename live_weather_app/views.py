@@ -8,6 +8,7 @@ import requests
 import json
 from datetime import datetime
 from .models import Place, lastTimeUpdated
+import os
 
 class NewCity(forms.Form):
     cityInput = forms.CharField(label='cityInput', max_length=100)
@@ -36,6 +37,7 @@ def get_weather_info(city):
         'iconWeb' : "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png",
     }
 
+# Map for the index.html page
 def map(request):
     if not request.method == "POST":
         get_weather_info('Fairfax')
@@ -46,15 +48,43 @@ def map(request):
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
     list_places = travel_advisor()
+    #print("List places: ", len(list_places))
+    if len(list_places) == 0:
+        list_places.append("None")
     context = {
         "city_weather_update": city_weather_update,
         "place" : Place.objects.all(),
         "list_places": list_places,
-        "date": lastTimeUpdated.objects.all().first()
+        "date": lastTimeUpdated.objects.all().first(),
+        "mapType" : 'Temperature'
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
     return render(request, 'home/index.html', context)
+
+# Wind map function
+def windmap(request):
+    if not request.method == "POST":
+        get_weather_info('Fairfax')
+
+    else:
+        form = NewCity(request.POST)
+        if form.is_valid():
+            cityInput = form.cleaned_data["cityInput"]
+            get_weather_info(cityInput)
+    list_places = travel_advisor()
+    if len(list_places) == 0:
+        list_places.append("None")
+    context = {
+        "city_weather_update": city_weather_update,
+        "place" : Place.objects.all(),
+        "list_places": list_places,
+        "date": lastTimeUpdated.objects.all().first(),
+        "mapType" : 'Wind'
+    }
+    #print(context)
+    print("Last Updated: ", lastTimeUpdated.objects.all().first())
+    return render(request, 'home/windmap.html', context)
 
 def get_place_id(city):
     url = f"https://api.geoapify.com/v1/geocode/search?text={city}&format=json&apiKey=09008c734555433dbf212c6c61ebea3b"

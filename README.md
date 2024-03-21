@@ -6,6 +6,14 @@ https://cloud.maptiler.com/maps/basic-v2/
 
 https://openweathermap.org/weather-conditions
 
+https://stackoverflow.com/questions/68360214/running-python-script-in-background-ec2
+
+https://www.youtube.com/watch?v=u0oEIqQV_-E&t=10s&ab_channel=ShobiPP
+
+https://icons8.com/icon/set/wind-level/group-ui
+
+
+
 Libraries to install:
 requests
 django-bootstrap-v5
