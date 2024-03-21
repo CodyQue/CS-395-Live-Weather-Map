@@ -39,6 +39,7 @@ def get_weather_info(city):
 
 # Map for the index.html page
 def map(request):
+    zoomLevel = 1
     if not request.method == "POST":
         get_weather_info('Fairfax')
 
@@ -47,6 +48,7 @@ def map(request):
         if form.is_valid():
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
+            zoomLevel = 13.5
     list_places = travel_advisor()
     #print("List places: ", len(list_places))
     if len(list_places) == 0:
@@ -56,7 +58,8 @@ def map(request):
         "place" : Place.objects.all(),
         "list_places": list_places,
         "date": lastTimeUpdated.objects.all().first(),
-        "mapType" : 'Temperature'
+        "mapType" : 'Temperature',
+        "zoomLevel" : zoomLevel
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
@@ -64,6 +67,7 @@ def map(request):
 
 # Wind map function
 def windmap(request):
+    zoomLevel = 1
     if not request.method == "POST":
         get_weather_info('Fairfax')
 
@@ -72,6 +76,7 @@ def windmap(request):
         if form.is_valid():
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
+            zoomLevel = 13.5
     list_places = travel_advisor()
     if len(list_places) == 0:
         list_places.append("None")
@@ -80,7 +85,35 @@ def windmap(request):
         "place" : Place.objects.all(),
         "list_places": list_places,
         "date": lastTimeUpdated.objects.all().first(),
-        "mapType" : 'Wind'
+        "mapType" : 'Wind',
+        "zoomLevel" : zoomLevel
+    }
+    #print(context)
+    print("Last Updated: ", lastTimeUpdated.objects.all().first())
+    return render(request, 'home/windmap.html', context)
+
+# Humidity map function
+def humiditymap(request):
+    zoomLevel = 1
+    if not request.method == "POST":
+        get_weather_info('Fairfax')
+
+    else:
+        form = NewCity(request.POST)
+        if form.is_valid():
+            cityInput = form.cleaned_data["cityInput"]
+            get_weather_info(cityInput)
+            zoomLevel = 13.5
+    list_places = travel_advisor()
+    if len(list_places) == 0:
+        list_places.append("None")
+    context = {
+        "city_weather_update": city_weather_update,
+        "place" : Place.objects.all(),
+        "list_places": list_places,
+        "date": lastTimeUpdated.objects.all().first(),
+        "mapType" : 'Humidity',
+        "zoomLevel" : zoomLevel
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())

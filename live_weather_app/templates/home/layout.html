@@ -15,9 +15,9 @@
     {% endblock %}
     <div class = 'row' style="transform: translate(5%,0%);position:relative;margin:0;padding:0; width: 90%; ">
         <div class = 'col-3' style = 'margin-top: 10px;'>
-          <h3><b>CS 395: Live Weather Radar</b></h3>
-          <h5>{{mapType}} Map</h5>
-          <h8>Last Updated: {{ date.date }}</h8>
+          <h5><b>CS 395: Live Weather Radar</b></h5>
+          <h8><b>{{mapType}}</b> Map</h8>
+          <h8><b>Last Updated: </b> {{ date.date }}</h8>
         </div>
         <div class = 'col-6' style = 'text-align: center;'>
           <form method="post">
@@ -63,7 +63,7 @@
                     Wind Map
                 </button>
             </a>
-            <a href="windmap">
+            <a href="humiditymap">
                 <button type="button" style = "
                       background-color: #b96300; /* Green */
                         border: none;
@@ -86,7 +86,7 @@
           <h5><b>Temperature: </b>{{ city_weather_update.temperature}}</h5>
           <h5><b>Wind: </b>{{ city_weather_update.wind}}</h5>
           <h5><b>Humidity: </b>{{ city_weather_update.humidity}}</h5>
-          <h1><b>Places to visit in {{ city_weather_update.city }}</b></h1>
+          <h2><b>Places to visit in {{ city_weather_update.city }}</b></h2>
           {% for l in list_places %}
             <h5>{{ l }}</h5>
           {% endfor %}
