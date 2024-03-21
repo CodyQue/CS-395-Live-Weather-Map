@@ -21,13 +21,13 @@
             ],
             view: new ol.View({
               center: ol.proj.fromLonLat(['{{ city_weather_update.lon }}', '{{ city_weather_update.lat }}']),
-              zoom: 13.5
+              zoom: '{{ zoomLevel }}'
             })
           });
         </script>
         {% for p in place%}
         <script>
-          console.log("PRINTED FROM OTHER SCRIPT")
+          //console.log("PRINTED FROM OTHER SCRIPT")
           map.addLayer(new ol.layer.Vector({
             source: new ol.source.Vector({
               features: [
