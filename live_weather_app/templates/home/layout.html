@@ -1,6 +1,7 @@
 {% load static %}
 
 <html>
+  <meta charset="UTF-8">
 <head>
   <title>Live Weather Radar / Predictor</title>
   <script src="https://cdn.jsdelivr.net/npm/ol@v9.0.0/dist/ol.js"></script>
@@ -16,7 +17,7 @@
     <div class = 'row' style="transform: translate(5%,0%);position:relative;margin:0;padding:0; width: 90%; ">
       <div class = 'col-3' style = "margin-top: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
           <h4><b>CS 395: Live Weather Map</b></h4>
-          <h5><b>{{mapType}}</b> Map</h5>
+          <h5>&#9925; <b>{{mapType}}</b> Map &#9925;</h5>
           <p><b>Last Updated:</b> {{ date.date }}</p>
         </div>
         <div class = 'col-6' style = "text-align: center; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif";>
