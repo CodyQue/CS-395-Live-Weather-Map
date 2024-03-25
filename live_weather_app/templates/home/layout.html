@@ -14,16 +14,16 @@
     {% block content %}
     {% endblock %}
     <div class = 'row' style="transform: translate(5%,0%);position:relative;margin:0;padding:0; width: 90%; ">
-        <div class = 'col-3' style = 'margin-top: 10px;'>
-          <h5><b>CS 395: Live Weather Radar</b></h5>
-          <h8><b>{{mapType}}</b> Map</h8>
-          <h8><b>Last Updated: </b> {{ date.date }}</h8>
+      <div class = 'col-3' style = "margin-top: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+          <h4><b>CS 395: Live Weather Map</b></h4>
+          <h5><b>{{mapType}}</b> Map</h5>
+          <p><b>Last Updated:</b> {{ date.date }}</p>
         </div>
-        <div class = 'col-6' style = 'text-align: center;'>
+        <div class = 'col-6' style = "text-align: center; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif";>
           <form method="post">
             <div id="searchPlace" style = "width: 100%;">
                 {% csrf_token %}
-                <input id="cityInput" name = 'cityInput' placeholder="Enter A Country, City, Or State" type="text" style = "width: 13vw; margin-top: 10px;" />
+                <input id="cityInput" name = 'cityInput' placeholder="Enter A Country, City, Or State" type="text" style = "width: 15vw; margin-top: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" />
                 <button for="cityInput"  type="submit" style = "
                   background-color: #555555;
                   border: none;
@@ -31,62 +31,70 @@
                   text-align: center;
                   text-decoration: none;
                   display: inline-block;
-                  font-size: 16px;
-                ">Search Place</button>
+                  font-size: 16px;">
+                  Search Place
+                </button>
             </div>
           </form>
+          {% for i in errorPlace%}
+          <p style = "color: red"><b>That place does not exist, please try again</b></p>
+          {% endfor %}
          </div>
          <div class = 'col-3' style = 'margin-top: 10px; width: 50vw'>
-            <a href="/">
-                <button type="button" style = "
-                      background-color: #000000; /* Green */
-                        border: none;
-                        color: rgb(255, 255, 255);
-                        padding: 5px 15px;
-                        text-align: center;
-                        text-decoration: none;
-                        display: inline-block;
-                        font-size: 16px;">
-                    Temperature Map
-                </button>
+          <a href="/">
+            <button type="button" style = "
+                  background-color: #000000; /* Green */
+                    border: none;
+                    color: rgb(255, 255, 255);
+                    padding: 5px 15px;
+                    text-align: center;
+                    text-decoration: none;
+                    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                    display: inline-block;
+                    font-size: 16px;">
+                    
+                Temperature Map
+            </button>
             </a>
             <a href="windmap">
-                <button type="button" style = "
-                      background-color: #555555; /* Green */
-                        border: none;
-                        color: rgb(255, 255, 255);
-                        padding: 5px 15px;
-                        text-align: center;
-                        text-decoration: none;
-                        display: inline-block;
-                        font-size: 16px;">
-                    Wind Map
-                </button>
+              <button type="button" style = "
+                    background-color: #555555; /* Green */
+                      border: none;
+                      color: rgb(255, 255, 255);
+                      padding: 5px 15px;
+                      text-align: center;
+                      text-decoration: none;
+                      display: inline-block;
+                      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                      font-size: 16px;">
+                  Wind Map
+              </button>
             </a>
-            <a href="humiditymap">
-                <button type="button" style = "
-                      background-color: #b96300; /* Green */
-                        border: none;
-                        color: rgb(255, 255, 255);
-                        padding: 5px 15px;
-                        text-align: center;
-                        text-decoration: none;
-                        display: inline-block;
-                        font-size: 16px;">
-                    Humidity Map
-                </button>
+            <a href="windmap">
+              <button type="button" style = "
+                    background-color: #b96300; /* Green */
+                      border: none;
+                      color: rgb(255, 255, 255);
+                      padding: 5px 15px;
+                      text-align: center;
+                      text-decoration: none;
+                      display: inline-block;
+                      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                      font-size: 16px;">
+                  Humidity Map
+              </button>
             </a>
          </div>
         </div>
           
-        <div class = 'col-3' Style="transform: translate(0%, 10%); background-image:linear-gradient(rgb(128, 128, 128), white);border-radius: 25px; margin-left: 4%; height: 50vh;">
+        <div class = 'col-3' Style="transform: translate(0%, 10%); background-image:linear-gradient(rgb(226, 230, 170), white);border-radius: px; margin-left: 5%; height: relative; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
           
           <h1><b>{{ city_weather_update.city}}</b></h1>
           <h5><b>Description: </b>{{ city_weather_update.description}}</h5>
           <h5><b>Temperature: </b>{{ city_weather_update.temperature}}</h5>
           <h5><b>Wind: </b>{{ city_weather_update.wind}}</h5>
           <h5><b>Humidity: </b>{{ city_weather_update.humidity}}</h5>
-          <h2><b>Places to visit in {{ city_weather_update.city }}</b></h2>
+          <h3><b>Places to visit in {{ city_weather_update.city }}</b></h3>
           {% for l in list_places %}
             <h5>{{ l }}</h5>
           {% endfor %}
