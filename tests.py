@@ -21,4 +21,7 @@ with sync_playwright() as p:
     page.wait_for_selector(".col-6") # wait for the error message to spawn. Not good, waiting for class, not id.
     print("Error message spawned, error handled.")
     input("Waiting for user input...")
-    
+    page.click("#tempBut")
+    mapType = page.query_selector("mapTypeDiv")
+    if mapType.inner_html() == "Wind": print("Wind button clicked")
+    input("wait for user...")
