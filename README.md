@@ -12,7 +12,7 @@ https://www.youtube.com/watch?v=u0oEIqQV_-E&t=10s&ab_channel=ShobiPP
 
 https://icons8.com/icon/set/wind-level/group-ui
 
-
+https://openlayers.org/en/latest/examples/heatmap-earthquakes.html
 
 Libraries to install:
 requests

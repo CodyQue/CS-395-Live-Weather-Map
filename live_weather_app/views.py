@@ -19,7 +19,7 @@ def get_geolocation(): # gets user ip and finds location.
     resp = requests.get(url)
     return [resp.json()["location"]["latitude"], resp.json()["location"]["longitude"]]
 
-def getWindIcon(item):
+def getWindIcon(item): # Used to get the wind image url depending on wind levels
     if item < 12:
         return 'lightwind.png'
     elif item >= 12 and item < 39:
@@ -27,7 +27,7 @@ def getWindIcon(item):
     else:
         return 'strongwind.png'
     
-def get_weather_info(city):
+def get_weather_info(city): # Used to fetch weather information using the OpenWeather API
     API_KEY = 'cdac524628de1773c07153a946813a62'
     url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric'
     global city_weather_update 
@@ -105,7 +105,7 @@ def map(request):
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
     return render(request, URLlink, context)
 
-# Wind map function
+# Map for the windmap.html page
 def windmap(request):
     URLlink = 'home/windmap.html'
     zoomLevel = 1

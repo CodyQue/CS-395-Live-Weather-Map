@@ -3,12 +3,52 @@
 
 {% block content %}
 	<div id="map" style="position:absolute;height:100%;width:100%;">
-        <script type = "text/javascript">
-          /**
-          *
-          * This script is used for display the map, and displaying points on the map
-          *
-          **/
+        <script>
+            var lowHumidity = {} //Dictionary for the different Heatmap vectors
+            var lowHumidityfeatures = []
+            var mediumHumidity = {} //Dictionary for the different Heatmap vectors
+            var mediumHumidityfeatures = []
+            var highHumidity = {} //Dictionary for the different Heatmap vectors
+            var highHumidityfeatures = []
+        </script>
+        {% for p in place%}
+        <script>
+            //console.log("Long: " + '{{ p.lon }}' + ", Lat: " + '{{ p.lat }}')
+            h = '{{ p.humidity }}'
+            h2 = h.replace('%', '')
+            humidity = parseInt(h2)
+            console.log(humidity)
+            if (humidity < 40) { //Checks if the humidity is less than 40% (low humidity)
+                lowHumidityfeatures.push(new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat(['{{ p.long }}', '{{ p.lat }}']))))
+            }
+            else if (humidity >= 40 && humidity < 70) {  //Checks if the humidity is between 40% and 70% (medium humidity)
+                mediumHumidityfeatures.push(new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat(['{{ p.long }}', '{{ p.lat }}']))))
+            }
+            else { //Checks if the humidity is greater than 70% (high humidity)
+                highHumidityfeatures.push(new ol.Feature(new ol.geom.Point(ol.proj.fromLonLat(['{{ p.long }}', '{{ p.lat }}']))))
+            }
+        </script>
+        {% endfor %}
+        <script>
+            lowHumidity.source = new ol.source.Vector({
+                features: lowHumidityfeatures
+                }),
+            lowHumidity.blur = 50
+            lowHumidity.radius = 8
+
+            mediumHumidity.source = new ol.source.Vector({
+                features: mediumHumidityfeatures
+                }),
+            mediumHumidity.blur = 50
+            mediumHumidity.radius = 9
+
+            highHumidity.source = new ol.source.Vector({
+                features: highHumidityfeatures
+                }),
+            highHumidity.blur = 50
+            highHumidity.radius = 10
+        </script>
+        <script type = "text/javascript"> 
           var map = new ol.Map({
             target: 'map',
             layers: [
@@ -17,7 +57,10 @@
                   url: 'https://api.maptiler.com/maps/basic-v2/tiles.json?key=U6osgvYMOlDTHjF5wgGc',
                   tileSize: 512
                 })
-              })
+              }),
+              new ol.layer.Heatmap(lowHumidity),
+              //new ol.layer.Heatmap(mediumHumidity),
+              //new ol.layer.Heatmap(highHumidity),
             ],
             view: new ol.View({
               center: ol.proj.fromLonLat(['{{ city_weather_update.lon }}', '{{ city_weather_update.lat }}']),
@@ -25,28 +68,6 @@
             })
           });
         </script>
-        {% for p in place%}
-        <script>
-          //console.log("PRINTED FROM OTHER SCRIPT")
-          map.addLayer(new ol.layer.Vector({
-            source: new ol.source.Vector({
-              features: [
-                new ol.Feature ({
-                  geometry: new ol.geom.Point(
-                    ol.proj.fromLonLat((['{{ p.long }}', '{{ p.lat }}']))
-                  )
-                })
-              ],
-            }),
-            style: new ol.style.Style({
-              image: new ol.style.Icon({
-                anchor: [0.2, 0.5],
-                crossOrigin: 'anonymous',
-                src: '{{ p.iconWeb}}'
-              })
-            })
-          }))
-        </script>
-        {% endfor %}
+
 		</div>
 {% endblock %}
