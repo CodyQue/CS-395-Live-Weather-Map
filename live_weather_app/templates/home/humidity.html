@@ -59,8 +59,8 @@
                 })
               }),
               new ol.layer.Heatmap(lowHumidity),
-              //new ol.layer.Heatmap(mediumHumidity),
-              //new ol.layer.Heatmap(highHumidity),
+              new ol.layer.Heatmap(mediumHumidity),
+              new ol.layer.Heatmap(highHumidity),
             ],
             view: new ol.View({
               center: ol.proj.fromLonLat(['{{ city_weather_update.lon }}', '{{ city_weather_update.lat }}']),
