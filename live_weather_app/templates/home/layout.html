@@ -5,6 +5,10 @@
 <head>
   <title>Live Weather Radar / Predictor</title>
   <script src="https://cdn.jsdelivr.net/npm/ol@v9.0.0/dist/ol.js"></script>
+<!--   <script src="{% static '/datalist.js' %}"></script>
+ -->  
+ <link rel="stylesheet" href="static/css/styles.css">
+ <link rel="stylesheet" href="static/css/styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.0.0/ol.css">
   {% load bootstrap5 %}
   {% bootstrap_css %}
@@ -14,25 +18,1346 @@
     
     {% block content %}
     {% endblock %}
-    <div class = 'row' style="transform: translate(5%,0%);position:relative;margin:0;padding:0; width: 90%; ">
-      <div class = 'col-3' style = "margin-top: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
-          <h4><b>CS 395: Live Weather Map</b></h4>
-          <h5>&#9925; <b>{{mapType}}</b> Map &#9925;</h5>
-          <p><b>Last Updated:</b> {{ date.date }}</p>
+    <div class = 'row'>
+      <div class = 'col-3'>
+        <h4><b>CS 395: Live Weather Map</b></h4>
+        <h5>&#9925; <b>{{mapType}}</b> Map &#9925;</h5>
+        <p><b>Last Updated:</b> {{ date.date }}</p>
         </div>
-        <div class = 'col-6' style = "text-align: center; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif";>
+        <div class = 'col-6'>
           <form method="post">
-            <div id="searchPlace" style = "width: 100%;">
+            <div id="searchPlace">
                 {% csrf_token %}
-                <input id="cityInput" name = 'cityInput' placeholder="Enter A Country, City, Or State" type="text" style = "width: 15vw; margin-top: 10px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" />
-                <button for="cityInput"  type="submit" style = "
-                  background-color: #555555;
-                  border: none;
-                  color: white;
-                  text-align: center;
-                  text-decoration: none;
-                  display: inline-block;
-                  font-size: 16px;">
+				<template id="allPlaces">
+					<option>Reston</option>
+					<option>Herndon</option>
+					<option>Fairfax</option>
+					<option>Leesburg</option>
+					<option>Alexandria</option>
+					<option>Norfolk</option>
+					<option>Williamsburg</option>
+					<option>Arlington</option>
+					<option>Virginia Beach</option>
+					<option>Richmond</option>
+					<option>Charlottesville</option>
+					<option>Roanoke</option>
+					<option>Chesapeake</option>
+					<option>Fredericksburg</option>
+					<option>Manassas</option>
+					<option>Sterling</option>
+					<option>Ashburn</option>
+					<option>Falls Church</option>
+					<option>Annandale</option>
+					<option>Woodbridge</option>
+					<option>Dumfries</option>
+					<option>Springfield</option>
+					<option>Yorktown</option>
+					<option>Front Royal</option>
+					<option>Salem</option>
+					<option>Bedford</option>
+					<option>Purcellville</option>
+					<option>Harare</option>
+					<option>Lusaka</option>
+					<option>Kitwe</option>
+					<option>Sanaa</option>
+					<option>Aden</option>
+					<option>Ibb</option>
+					<option>Ho Chi Minh City</option>
+					<option>Hanoi</option>
+					<option>Can Tho</option>
+					<option>Da Nang</option>
+					<option>Bien Hoa</option>
+					<option>Caracas</option>
+					<option>Maracaibo</option>
+					<option>Valencia</option>
+					<option>Barquisimeto</option>
+					<option>Maracay</option>
+					<option>Ciudad Guayana</option>
+					<option>Maturin</option>
+					<option>Tashkent</option>
+					<option>Montevideo</option>
+					<option>New York City</option>
+					<option>Los Angeles</option>
+					<option>Chicago</option>
+					<option>Houston</option>
+					<option>Phoenix</option>
+					<option>Philadelphia</option>
+					<option>San Antonio</option>
+					<option>San Diego</option>
+					<option>Dallas</option>
+					<option>Jacksonville</option>
+					<option>Fort Worth</option>
+					<option>Austin</option>
+					<option>San Jose</option>
+					<option>Charlotte</option>
+					<option>Columbus</option>
+					<option>Indianapolis</option>
+					<option>Seattle</option>
+					<option>London</option>
+					<option>Manchester</option>
+					<option>Birmingham</option>
+					<option>Glasgow</option>
+					<option>Southampton</option>
+					<option>Liverpool</option>
+					<option>Newcastle upon Tyne</option>
+					<option>Nottingham</option>
+					<option>Sheffield</option>
+					<option>Dubai</option>
+					<option>Sharjah</option>
+					<option>Abu Dhabi</option>
+					<option>Kiev</option>
+					<option>Kharkiv</option>
+					<option>Odesa</option>
+					<option>Dnipro</option>
+					<option>Donetsk</option>
+					<option>Kampala</option>
+					<option>Ashgabat</option>
+					<option>Istanbul</option>
+					<option>Ankara</option>
+					<option>Izmir</option>
+					<option>Bursa</option>
+					<option>Adana</option>
+					<option>Gaziantep</option>
+					<option>Konya</option>
+					<option>Antalya</option>
+					<option>Diyarbakir</option>
+					<option>Mersin</option>
+					<option>Kayseri</option>
+					<option>Eskisehir</option>
+					<option>Gebze</option>
+					<option>Tunis</option>
+					<option>Lome</option>
+					<option>Bangkok</option>
+					<option>Chon Buri</option>
+					<option>Samut Prakan</option>
+					<option>Chiang Mai</option>
+					<option>Songkhla</option>
+					<option>Nonthaburi</option>
+					<option>Pathum Thani</option>
+					<option>Nakhon Ratchasima</option>
+					<option>Dar es Salaam</option>
+					<option>Mwanza</option>
+					<option>Zanzibar</option>
+					<option>Dushanbe</option>
+					<option>New Taipei</option>
+					<option>Taipei</option>
+					<option>Taoyuan</option>
+					<option>Taizhong</option>
+					<option>Tainan</option>
+					<option>Damascus</option>
+					<option>Aleppo</option>
+					<option>Homs</option>
+					<option>Hamah</option>
+					<option>Zurich</option>
+					<option>Stockholm</option>
+					<option>Khartoum</option>
+					<option>Nyala</option>
+					<option>Madrid</option>
+					<option>Barcelona</option>
+					<option>Seoul</option>
+					<option>Busan</option>
+					<option>Incheon</option>
+					<option>Daegu</option>
+					<option>Gwangju</option>
+					<option>Yongin</option>
+					<option>Goyang</option>
+					<option>Changwon</option>
+					<option>Seongnam</option>
+					<option>Ulsan</option>
+					<option>Bucheon</option>
+					<option>Ansan</option>
+					<option>Johannesburg</option>
+					<option>Cape Town</option>
+					<option>Ekurhuleni</option>
+					<option>Durban</option>
+					<option>Pretoria</option>
+					<option>Port Elizabeth</option>
+					<option>Soshanguve</option>
+					<option>Vereeniging</option>
+					<option>Mogadishu</option>
+					<option>Hargeysa</option>
+					<option>Merca</option>
+					<option>Singapore</option>
+					<option>Freetown</option>
+					<option>Belgrade</option>
+					<option>Dakar</option>
+					<option>Riyadh</option>
+					<option>Mecca</option>
+					<option>Medina</option>
+					<option>Ad-Dammam</option>
+					<option>Kigali</option>
+					<option>Moscow</option>
+					<option>Saint Petersburg</option>
+					<option>Novosibirsk</option>
+					<option>Yekaterinburg</option>
+					<option>Kazan</option>
+					<option>Nizhniy Novgorod</option>
+					<option>Chelyabinsk</option>
+					<option>Omsk</option>
+					<option>Krasnoyarsk</option>
+					<option>Samara</option>
+					<option>Ufa</option>
+					<option>Rostov-on-Don</option>
+					<option>Perm</option>
+					<option>Voronezh</option>
+					<option>Krasnodar</option>
+					<option>Volgograd</option>
+					<option>Tyumen</option>
+					<option>Saratov</option>
+					<option>Bucharest</option>
+					<option>Brazzaville</option>
+					<option>Pointe-Noire</option>
+					<option>Ar-Rayyan</option>
+					<option>San Juan</option>
+					<option>Lisbon</option>
+					<option>Porto</option>
+					<option>Warsaw</option>
+					<option>Krakow</option>
+					<option>Manila</option>
+					<option>Davao City</option>
+					<option>Cebu City</option>
+					<option>Zamboanga City</option>
+					<option>Antipolo</option>
+					<option>Dasmarinas</option>
+					<option>Cagayan de Oro City</option>
+					<option>Bacoor</option>
+					<option>Lima</option>
+					<option>Arequipa</option>
+					<option>Trujillo</option>
+					<option>Asuncion</option>
+					<option>Panama City</option>
+					<option>Gaza</option>
+					<option>Karachi</option>
+					<option>Lahore</option>
+					<option>Faisalabad</option>
+					<option>Peshawar</option>
+					<option>Gujranwala</option>
+					<option>Rawalpindi</option>
+					<option>Multan</option>
+					<option>Islamabad</option>
+					<option>Quetta</option>
+					<option>Bahawalpur</option>
+					<option>Sialkot</option>
+					<option>Sargodha</option>
+					<option>Muscat</option>
+					<option>Oslo</option>
+					<option>Pyongyang</option>
+					<option>Lagos</option>
+					<option>Kano</option>
+					<option>Abuja</option>
+					<option>Ibadan</option>
+					<option>Port Harcourt</option>
+					<option>Benin City</option>
+					<option>Onitsha</option>
+					<option>Uyo</option>
+					<option>Nnewi</option>
+					<option>Aba</option>
+					<option>Kaduna</option>
+					<option>Ikorodu</option>
+					<option>Ilorin</option>
+					<option>Warri</option>
+					<option>Owerri</option>
+					<option>Jos</option>
+					<option>Umuahia</option>
+					<option>Lokoja</option>
+					<option>Enugu</option>
+					<option>Maiduguri</option>
+					<option>Oshogbo</option>
+					<option>Zaria</option>
+					<option>Akure</option>
+					<option>Niamey</option>
+					<option>Managua</option>
+					<option>Auckland</option>
+					<option>Amsterdam</option>
+					<option>Rotterdam</option>
+					<option>Kathmandu</option>
+					<option>Yangon</option>
+					<option>Mandalay</option>
+					<option>Nay Pyi Taw</option>
+					<option>Matola</option>
+					<option>Maputo</option>
+					<option>Nampula</option>
+					<option>Casablanca</option>
+					<option>Rabat</option>
+					<option>Tanger</option>
+					<option>Fes</option>
+					<option>Marrakech</option>
+					<option>Agadir</option>
+					<option>Ulaanbaatar</option>
+					<option>Mexico City</option>
+					<option>Guadalajara</option>
+					<option>Monterrey</option>
+					<option>Puebla</option>
+					<option>Toluca de Lerdo</option>
+					<option>Tijuana</option>
+					<option>La Laguna</option>
+					<option>Ciudad Juarez</option>
+					<option>Queretaro</option>
+					<option>San Luis Potosi</option>
+					<option>Merida</option>
+					<option>Mexicali</option>
+					<option>Aguascalientes</option>
+					<option>Cuernavaca</option>
+					<option>Chihuahua</option>
+					<option>Tampico</option>
+					<option>Saltillo</option>
+					<option>Cancun</option>
+					<option>Acapulco de Juarez</option>
+					<option>Morelia</option>
+					<option>Veracruz</option>
+					<option>Reynosa</option>
+					<option>Villahermosa</option>
+					<option>Hermosillo</option>
+					<option>Tuxtla Gutierrez</option>
+					<option>Culiacan</option>
+					<option>Xalapa</option>
+					<option>Nouakchott</option>
+					<option>Bamako</option>
+					<option>Kuala Lumpur</option>
+					<option>Johor Bahru</option>
+					<option>Ipoh</option>
+					<option>Lilongwe</option>
+					<option>Antananarivo</option>
+					<option>Tripoli</option>
+					<option>Misratah</option>
+					<option>Monrovia</option>
+					<option>Beirut</option>
+					<option>Bishkek</option>
+					<option>Kuwait City</option>
+					<option>Nairobi</option>
+					<option>Mombasa</option>
+					<option>Almaty</option>
+					<option>Astana</option>
+					<option>Amman</option>
+					<option>Zarqa</option>
+					<option>Tokyo</option>
+					<option>Osaka</option>
+					<option>Nagoya</option>
+					<option>Fukuoka</option>
+					<option>Shizuoka</option>
+					<option>Sapporo</option>
+					<option>Sendai</option>
+					<option>Hiroshima</option>
+					<option>Niigata</option>
+					<option>Abidjan</option>
+					<option>Rome</option>
+					<option>Milan</option>
+					<option>Naples</option>
+					<option>Turin</option>
+					<option>Bergamo</option>
+					<option>Palermo</option>
+					<option>Bologna</option>
+					<option>Tel Aviv</option>
+					<option>Haifa</option>
+					<option>Jerusalem</option>
+					<option>Dublin</option>
+					<option>Baghdad</option>
+					<option>Mosul</option>
+					<option>Basra</option>
+					<option>Kirkuk</option>
+					<option>Najaf</option>
+					<option>Erbil</option>
+					<option>Sulaimaniya</option>
+					<option>Amara</option>
+					<option>Tehran</option>
+					<option>Mashhad</option>
+					<option>Esfahan</option>
+					<option>Shiraz</option>
+					<option>Tabriz</option>
+					<option>Karaj</option>
+					<option>Qom</option>
+					<option>Ahvaz</option>
+					<option>Kermanshah</option>
+					<option>Orumiyeh</option>
+					<option>Jakarta</option>
+					<option>Bekasi</option>
+					<option>Depok</option>
+					<option>Surabaya</option>
+					<option>Bandung</option>
+					<option>Tangerang</option>
+					<option>Medan</option>
+					<option>Semarang</option>
+					<option>Palembang</option>
+					<option>Makassar</option>
+					<option>Pekan Baru</option>
+					<option>Tasikmalaya</option>
+					<option>Bogor</option>
+					<option>Bandar Lampung</option>
+					<option>Samarinda</option>
+					<option>Denpasar</option>
+					<option>Padang</option>
+					<option>Malang</option>
+					<option>Banjarmasin</option>
+					<option>Delhi</option>
+					<option>Mumbai</option>
+					<option>Kolkata</option>
+					<option>Bangalore</option>
+					<option>Chennai</option>
+					<option>Hyderabad</option>
+					<option>Ahmedabad</option>
+					<option>Surat</option>
+					<option>Pune</option>
+					<option>Jaipur</option>
+					<option>Kozhikode</option>
+					<option>Malappuram</option>
+					<option>Lucknow</option>
+					<option>Thrissur</option>
+					<option>Kochi</option>
+					<option>Indore</option>
+					<option>Kanpur</option>
+					<option>Nagpur</option>
+					<option>Coimbatore</option>
+					<option>Thiruvananthapuram</option>
+					<option>Patna</option>
+					<option>Bhopal</option>
+					<option>Agra</option>
+					<option>Kannur</option>
+					<option>Visakhapatnam</option>
+					<option>Vadodara</option>
+					<option>Nashik</option>
+					<option>Vijayawada</option>
+					<option>Kollam</option>
+					<option>Rajkot</option>
+					<option>Ludhiana</option>
+					<option>Madurai</option>
+					<option>Raipur</option>
+					<option>Meerut</option>
+					<option>Varanasi</option>
+					<option>Srinagar</option>
+					<option>Tiruppur</option>
+					<option>Jamshedpur</option>
+					<option>Aurangabad</option>
+					<option>Jodhpur</option>
+					<option>Ranchi</option>
+					<option>Kota</option>
+					<option>Jabalpur</option>
+					<option>Asansol</option>
+					<option>Gwalior</option>
+					<option>Allahabad</option>
+					<option>Amritsar</option>
+					<option>Dhanbad</option>
+					<option>Bareilly</option>
+					<option>Aligarh</option>
+					<option>Moradabad</option>
+					<option>Mysore</option>
+					<option>Bhubaneswar</option>
+					<option>Tiruchirappalli</option>
+					<option>Chandigarh</option>
+					<option>Saharanpur</option>
+					<option>Guwahati</option>
+					<option>Siliguri</option>
+					<option>Jalandhar</option>
+					<option>Solapur</option>
+					<option>Warangal</option>
+					<option>Dehradun</option>
+					<option>Guntur</option>
+					<option>Bhiwandi</option>
+					<option>Puducherry</option>
+					<option>Firozabad</option>
+					<option>Kottayam</option>
+					<option>Nellore</option>
+					<option>Bikaner</option>
+					<option>Muzaffarnagar</option>
+					<option>Kayamkulam</option>
+					<option>Amravati</option>
+					<option>Gorakhpur</option>
+					<option>Cuttack</option>
+					<option>Belgaum</option>
+					<option>Malegaon</option>
+					<option>Tirupati</option>
+					<option>Mangalore</option>
+					<option>Bhavnagar</option>
+					<option>Budapest</option>
+					<option>Hong Kong</option>
+					<option>Tegucigalpa</option>
+					<option>San Pedro Sula</option>
+					<option>Port-au-Prince</option>
+					<option>Conakry</option>
+					<option>Guatemala City</option>
+					<option>Athens</option>
+					<option>Thessaloniki</option>
+					<option>Kumasi</option>
+					<option>Accra</option>
+					<option>Tamale</option>
+					<option>Berlin</option>
+					<option>Hamburg</option>
+					<option>Munich</option>
+					<option>Cologne</option>
+					<option>Frankfurt</option>
+					<option>Tbilisi</option>
+					<option>Libreville</option>
+					<option>Paris</option>
+					<option>Lyon</option>
+					<option>Marseille</option>
+					<option>Lille</option>
+					<option>Toulouse</option>
+					<option>Bordeaux</option>
+					<option>Nice</option>
+					<option>Helsinki</option>
+					<option>Addis Ababa</option>
+					<option>Asmara</option>
+					<option>San Salvador</option>
+					<option>Cairo</option>
+					<option>Guayaquil</option>
+					<option>Quito</option>
+					<option>Kinshasa</option>
+					<option>Mbuji-Mayi</option>
+					<option>Lubumbashi</option>
+					<option>Kananga</option>
+					<option>Kisangani</option>
+					<option>Bukavu</option>
+					<option>Tshikapa</option>
+					<option>Bunia</option>
+					<option>Goma</option>
+					<option>Santo Domingo</option>
+					<option>Copenhagen</option>
+					<option>Prague</option>
+					<option>Havana</option>
+					<option>Bogota</option>
+					<option>Medellin</option>
+					<option>Cali</option>
+					<option>Barranquilla</option>
+					<option>Bucaramanga</option>
+					<option>Cartagena</option>
+					<option>Cucuta</option>
+					<option>Shanghai</option>
+					<option>Beijing</option>
+					<option>Chongqing</option>
+					<option>Guangzhou</option>
+					<option>Tianjin</option>
+					<option>Shenzhen</option>
+					<option>Nanjing</option>
+					<option>Chengdu</option>
+					<option>Wuhan</option>
+					<option>Hangzhou</option>
+					<option>Suzhou</option>
+					<option>Shenyang</option>
+					<option>Foshan</option>
+					<option>Dongguan</option>
+					<option>Dalian</option>
+					<option>Qingdao</option>
+					<option>Zhengzhou</option>
+					<option>Changsha</option>
+					<option>Urumqi</option>
+					<option>Kunming</option>
+					<option>Changchun</option>
+					<option>Hefei</option>
+					<option>Ningbo</option>
+					<option>Shantou</option>
+					<option>Shijiazhuang</option>
+					<option>Nanning</option>
+					<option>Changzhou</option>
+					<option>Nanchang</option>
+					<option>Wenzhou</option>
+					<option>Xiamen</option>
+					<option>Guiyang</option>
+					<option>Wuxi</option>
+					<option>Lanzhou</option>
+					<option>Handan</option>
+					<option>Huaian</option>
+					<option>Zhongshan</option>
+					<option>Weifang</option>
+					<option>Shaoxing</option>
+					<option>Yantai</option>
+					<option>Zibo</option>
+					<option>Huizhou</option>
+					<option>Luoyang</option>
+					<option>Nantong</option>
+					<option>Hohhot</option>
+					<option>Liuzhou</option>
+					<option>Baotou</option>
+					<option>Xuzhou</option>
+					<option>Putian</option>
+					<option>Yangzhou</option>
+					<option>Baoding</option>
+					<option>Haikou</option>
+					<option>Daqing</option>
+					<option>Lianyungang</option>
+					<option>Zhuhai</option>
+					<option>Quanzhou</option>
+					<option>Datong</option>
+					<option>Cixi</option>
+					<option>Jiangmen</option>
+					<option>Xiangyang</option>
+					<option>Yichang</option>
+					<option>Yinchuan</option>
+					<option>Suqian</option>
+					<option>Qinhuangdao</option>
+					<option>Anshan</option>
+					<option>Xining</option>
+					<option>Hengyang</option>
+					<option>Jilin</option>
+					<option>Anyang</option>
+					<option>Zhangjiakou</option>
+					<option>Huainan</option>
+					<option>Yiwu</option>
+					<option>Chaozhou</option>
+					<option>Ganzhou</option>
+					<option>Jiaxing</option>
+					<option>Weihai</option>
+					<option>Kaifeng</option>
+					<option>Liuyang</option>
+					<option>Liuan</option>
+					<option>Rizhao</option>
+					<option>Nanchong</option>
+					<option>Dongying</option>
+					<option>Zunyi</option>
+					<option>Zhanjiang</option>
+					<option>Shiyan</option>
+					<option>Tengzhou</option>
+					<option>Yingkou</option>
+					<option>Maoming</option>
+					<option>Jieyang</option>
+					<option>Jinhua</option>
+					<option>Baoji</option>
+					<option>Puning</option>
+					<option>Chifeng</option>
+					<option>Zhuzhou</option>
+					<option>Huaibei</option>
+					<option>Pizhou</option>
+					<option>Luohe</option>
+					<option>Jinzhou</option>
+					<option>Benxi</option>
+					<option>Binzhou</option>
+					<option>Bazhong</option>
+					<option>Guilin</option>
+					<option>Yueqing</option>
+					<option>Xinxiang</option>
+					<option>Wenling</option>
+					<option>Zaozhuang</option>
+					<option>Fuyang</option>
+					<option>Panjin</option>
+					<option>Ma'anshan</option>
+					<option>Shangrao</option>
+					<option>Zhaoqing</option>
+					<option>Chenzhou</option>
+					<option>Leshan</option>
+					<option>Dezhou</option>
+					<option>Changshu</option>
+					<option>Huzhou</option>
+					<option>Xuchang</option>
+					<option>Qujing</option>
+					<option>Yueyang</option>
+					<option>Guiping</option>
+					<option>Xintai</option>
+					<option>Chengde</option>
+					<option>Zhucheng</option>
+					<option>Leiyang</option>
+					<option>Laiwu</option>
+					<option>Jiujiang</option>
+					<option>Mudanjiang</option>
+					<option>Guigang</option>
+					<option>Hengshui</option>
+					<option>Zhangzhou</option>
+					<option>Xinyu</option>
+					<option>Linfen</option>
+					<option>Tianmen</option>
+					<option>Yangjiang</option>
+					<option>Liling</option>
+					<option>Deyang</option>
+					<option>Bengbu</option>
+					<option>Jiangyin</option>
+					<option>Baishan</option>
+					<option>Dandong</option>
+					<option>Changzhi</option>
+					<option>Changde</option>
+					<option>Liaoyang</option>
+					<option>Shangqiu</option>
+					<option>Xingtai</option>
+					<option>Quzhou</option>
+					<option>Huangshi</option>
+					<option>Fuxin</option>
+					<option>Yongzhou</option>
+					<option>Xinghua</option>
+					<option>Yibin</option>
+					<option>Xinyang</option>
+					<option>Luzhou</option>
+					<option>Yangquan</option>
+					<option>Huaihua</option>
+					<option>Xiaogan</option>
+					<option>Tianshui</option>
+					<option>Bozhou</option>
+					<option>Zhuji</option>
+					<option>Kunshan</option>
+					<option>Jincheng</option>
+					<option>Heze</option>
+					<option>Huludao</option>
+					<option>Haicheng</option>
+					<option>Taixing</option>
+					<option>Liaocheng</option>
+					<option>Zhumadian</option>
+					<option>Langfang</option>
+					<option>Anqiu</option>
+					<option>Gaomi</option>
+					<option>Hanchuan</option>
+					<option>Meishan</option>
+					<option>Danyang</option>
+					<option>Jiaozuo</option>
+					<option>Anqing</option>
+					<option>Linhai</option>
+					<option>Shaoguan</option>
+					<option>Yan'an</option>
+					<option>Dengzhou</option>
+					<option>Zigong</option>
+					<option>Qingyuan</option>
+					<option>Yuncheng</option>
+					<option>Shaoyang</option>
+					<option>Yanji</option>
+					<option>Yuxi</option>
+					<option>Tongliao</option>
+					<option>Tongling</option>
+					<option>Wuzhou</option>
+					<option>Dazhou</option>
+					<option>Jiamusi</option>
+					<option>Dongtai</option>
+					<option>Zhangjiagang</option>
+					<option>Panzhihua</option>
+					<option>Santiago</option>
+					<option>Valparaiso</option>
+					<option>Concepcion</option>
+					<option>Bangui</option>
+					<option>Toronto</option>
+					<option>Montreal</option>
+					<option>Vancouver</option>
+					<option>Calgary</option>
+					<option>Edmonton</option>
+					<option>Ottawa</option>
+					<option>Quebec City</option>
+					<option>Winnipeg</option>
+					<option>Hamilton</option>
+					<option>Yaounde</option>
+					<option>Douala</option>
+					<option>Phnom Penh</option>
+					<option>Bujumbura</option>
+					<option>Ouagadougou</option>
+					<option>Bobo-Dioulasso</option>
+					<option>Sofia</option>
+					<option>Sao Paulo</option>
+					<option>Rio de Janeiro</option>
+					<option>Belo Horizonte</option>
+					<option>Brasilia</option>
+					<option>Recife</option>
+					<option>Fortaleza</option>
+					<option>Porto Alegre</option>
+					<option>Salvador</option>
+					<option>Curitiba</option>
+					<option>Campinas</option>
+					<option>Goiania</option>
+					<option>Belem</option>
+					<option>Manaus</option>
+					<option>Natal</option>
+					<option>Joao Pessoa</option>
+					<option>Maceio</option>
+					<option>Joinville</option>
+					<option>Florianopolis</option>
+					<option>Aracaju</option>
+					<option>Teresina</option>
+					<option>Campo Grande</option>
+					<option>Londrina</option>
+					<option>Sorocaba</option>
+					<option>Sao Jose dos Campos</option>
+					<option>Ribeirao Preto</option>
+					<option>La Paz</option>
+					<option>Santa Cruz</option>
+					<option>Cochabamba</option>
+					<option>Abomey-Calavi</option>
+					<option>Brussels</option>
+					<option>Antwerp</option>
+					<option>Minsk</option>
+					<option>Dhaka</option>
+					<option>Chittagong</option>
+					<option>Sylhet</option>
+					<option>Rajshahi</option>
+					<option>Khulna</option>
+					<option>Bogra</option>
+					<option>Baku</option>
+					<option>Vienna</option>
+					<option>Melbourne</option>
+					<option>Sydney</option>
+					<option>Brisbane</option>
+					<option>Perth</option>
+					<option>Adelaide</option>
+					<option>Yerevan</option>
+					<option>Buenos Aires</option>
+					<option>Cordoba</option>
+					<option>Rosario</option>
+					<option>Mendoza</option>
+					<option>San Miguel de Tucuman</option>
+					<option>La Plata</option>
+					<option>Luanda</option>
+					<option>Lubango</option>
+					<option>Cabinda</option>
+					<option>Benguela</option>
+					<option>Malanje</option>
+					<option>Huambo</option>
+					<option>Algiers</option>
+					<option>Oran</option>
+					<option>Kabul</option>
+					<option>Detroit</option>
+					<option>Denver</option>
+					<option>New Orleans</option>
+					<option>Boston</option>
+					<option>Houston</option>
+					<option>Miami Gardens</option>
+					<option>New York City</option>
+					<option>Los Angeles</option>
+					<option>Chicago</option>
+					<option>Houston</option>
+					<option>Phoenix</option>
+					<option>Philadelphia</option>
+					<option>San Antonio</option>
+					<option>San Diego</option>
+					<option>Dallas</option>
+					<option>Jacksonville</option>
+					<option>Fort Worth</option>
+					<option>Austin</option>
+					<option>San Jose</option>
+					<option>Charlotte</option>
+					<option>Columbus</option>
+					<option>Indianapolis</option>
+					<option>Seattle</option>
+					<option>San Francisco</option>
+					<option>Denver</option>
+					<option>Oklahoma City</option>
+					<option>Nashville</option>
+					<option>El Paso</option>
+					<option>Washington</option>
+					<option>Las Vegas</option>
+					<option>Boston</option>
+					<option>Portland</option>
+					<option>Louisville</option>
+					<option>Memphis</option>
+					<option>Detroit</option>
+					<option>Albuquerque</option>
+					<option>Baltimore</option>
+					<option>Tucson</option>
+					<option>Milwaukee</option>
+					<option>Fresno</option>
+					<option>Sacramento</option>
+					<option>Mesa</option>
+					<option>Kansas City</option>
+					<option>Atlanta</option>
+					<option>Colorado Springs</option>
+					<option>Raleigh</option>
+					<option>Omaha</option>
+					<option>Miami</option>
+					<option>Virginia Beach</option>
+					<option>Long Beach</option>
+					<option>Oakland</option>
+					<option>Minneapolis</option>
+					<option>Bakersfield</option>
+					<option>Tulsa</option>
+					<option>Tampa</option>
+					<option>Aurora</option>
+					<option>Arlington</option>
+					<option>Wichita</option>
+					<option>New Orleans</option>
+					<option>Cleveland</option>
+					<option>Henderson</option>
+					<option>Anaheim</option>
+					<option>Honolulu</option>
+					<option>Riverside</option>
+					<option>Orlando</option>
+					<option>Stockton</option>
+					<option>Irvine</option>
+					<option>Lexington</option>
+					<option>Corpus Christi</option>
+					<option>Cincinnati</option>
+					<option>Santa Ana</option>
+					<option>Greensboro</option>
+					<option>Pittsburgh</option>
+					<option>Newark</option>
+					<option>North Las Vegas</option>
+					<option>Durham</option>
+					<option>St. Paul</option>
+					<option>Lincoln</option>
+					<option>Plano</option>
+					<option>Chandler</option>
+					<option>Anchorage</option>
+					<option>Chula Vista</option>
+					<option>Reno</option>
+					<option>Gilbert</option>
+					<option>Jersey City</option>
+					<option>Madison</option>
+					<option>Buffalo</option>
+					<option>St. Louis</option>
+					<option>Fort Wayne</option>
+					<option>Lubbock</option>
+					<option>St. Petersburg</option>
+					<option>Toledo</option>
+					<option>Laredo</option>
+					<option>Port St. Lucie</option>
+					<option>Glendale</option>
+					<option>Chesapeake</option>
+					<option>Winston-Salem</option>
+					<option>Irving</option>
+					<option>Scottsdale</option>
+					<option>Cape Coral</option>
+					<option>Boise</option>
+					<option>Frisco</option>
+					<option>Enterprise</option>
+					<option>Garland</option>
+					<option>Arlington</option>
+					<option>Richmond</option>
+					<option>Spokane</option>
+					<option>Norfolk</option>
+					<option>Huntsville</option>
+					<option>Tacoma</option>
+					<option>Spring Valley</option>
+					<option>San Bernardino</option>
+					<option>Hialeah</option>
+					<option>Fremont</option>
+					<option>McKinney</option>
+					<option>Modesto</option>
+					<option>Baton Rouge</option>
+					<option>Fontana</option>
+					<option>Moreno Valley</option>
+					<option>Santa Clarita</option>
+					<option>Sioux Falls</option>
+					<option>Fayetteville</option>
+					<option>Salt Lake City</option>
+					<option>Des Moines</option>
+					<option>Rochester</option>
+					<option>Grand Prairie</option>
+					<option>Worcester</option>
+					<option>Tallahassee</option>
+					<option>Yonkers</option>
+					<option>Peoria</option>
+					<option>Little Rock</option>
+					<option>Augusta</option>
+					<option>Amarillo</option>
+					<option>Knoxville</option>
+					<option>Oxnard</option>
+					<option>Sunrise Manor</option>
+					<option>Columbus</option>
+					<option>Vancouver</option>
+					<option>Overland Park</option>
+					<option>Grand Rapids</option>
+					<option>Montgomery</option>
+					<option>Birmingham</option>
+					<option>Brownsville</option>
+					<option>Tempe</option>
+					<option>Huntington Beach</option>
+					<option>Providence</option>
+					<option>Akron</option>
+					<option>Chattanooga</option>
+					<option>Clarksville</option>
+					<option>Paradise</option>
+					<option>Cary</option>
+					<option>Fort Lauderdale</option>
+					<option>Newport News</option>
+					<option>Glendale</option>
+					<option>Ontario</option>
+					<option>Mobile</option>
+					<option>Salem</option>
+					<option>Eugene</option>
+					<option>Elk Grove</option>
+					<option>Rancho Cucamonga</option>
+					<option>Santa Rosa</option>
+					<option>Aurora</option>
+					<option>Shreveport</option>
+					<option>Murfreesboro</option>
+					<option>Springfield</option>
+					<option>Oceanside</option>
+					<option>Pembroke Pines</option>
+					<option>Fort Collins</option>
+					<option>Garden Grove</option>
+					<option>Lancaster</option>
+					<option>Killeen</option>
+					<option>Surprise</option>
+					<option>Corona</option>
+					<option>Roseville</option>
+					<option>Denton</option>
+					<option>Salinas</option>
+					<option>Palmdale</option>
+					<option>Charleston</option>
+					<option>Lakewood</option>
+					<option>Macon</option>
+					<option>Paterson</option>
+					<option>Bellevue</option>
+					<option>Springfield</option>
+					<option>Hollywood</option>
+					<option>Alexandria</option>
+					<option>Sunnyvale</option>
+					<option>Hayward</option>
+					<option>Naperville</option>
+					<option>Kansas City</option>
+					<option>Joliet</option>
+					<option>Olathe</option>
+					<option>Escondido</option>
+					<option>Bridgeport</option>
+					<option>Savannah</option>
+					<option>Gainesville</option>
+					<option>Waco</option>
+					<option>McAllen</option>
+					<option>Mesquite</option>
+					<option>Visalia</option>
+					<option>Rockford</option>
+					<option>Thornton</option>
+					<option>Pasadena</option>
+					<option>New Haven</option>
+					<option>Columbia</option>
+					<option>Syracuse</option>
+					<option>Metairie</option>
+					<option>Pomona</option>
+					<option>Meridian</option>
+					<option>Miramar</option>
+					<option>Victorville</option>
+					<option>Jackson</option>
+					<option>Hampton</option>
+					<option>Palm Bay</option>
+					<option>Fullerton</option>
+					<option>Fargo</option>
+					<option>Stamford</option>
+					<option>Midland</option>
+					<option>Lewisville</option>
+					<option>Torrance</option>
+					<option>Cedar Rapids</option>
+					<option>Warren</option>
+					<option>Dayton</option>
+					<option>Carrollton</option>
+					<option>West Valley City</option>
+					<option>Orange</option>
+					<option>Round Rock</option>
+					<option>Coral Springs</option>
+					<option>Kent</option>
+					<option>Elizabeth</option>
+					<option>Norman</option>
+					<option>Sterling Heights</option>
+					<option>Columbia</option>
+					<option>Pasadena</option>
+					<option>Athens</option>
+					<option>Abilene</option>
+					<option>Clovis</option>
+					<option>Pearland</option>
+					<option>College Station</option>
+					<option>Lakeland</option>
+					<option>Santa Clara</option>
+					<option>Wilmington</option>
+					<option>Topeka</option>
+					<option>Allentown</option>
+					<option>West Palm Beach</option>
+					<option>Lehigh Acres</option>
+					<option>Billings</option>
+					<option>Simi Valley</option>
+					<option>The Woodlands</option>
+					<option>Rochester</option>
+					<option>Broken Arrow</option>
+					<option>Thousand Oaks</option>
+					<option>North Charleston</option>
+					<option>Lafayette</option>
+					<option>Vallejo</option>
+					<option>Hartford</option>
+					<option>Nampa</option>
+					<option>Spring Hill</option>
+					<option>Concord</option>
+					<option>Independence</option>
+					<option>Fairfield</option>
+					<option>Arvada</option>
+					<option>Cambridge</option>
+					<option>Richardson</option>
+					<option>New Braunfels</option>
+					<option>Allen</option>
+					<option>Buckeye</option>
+					<option>Tuscaloosa</option>
+					<option>Clearwater</option>
+					<option>West Jordan</option>
+					<option>Murrieta</option>
+					<option>League City</option>
+					<option>Ann Arbor</option>
+					<option>Las Cruces</option>
+					<option>High Point</option>
+					<option>Waterbury</option>
+					<option>Menifee</option>
+					<option>Antioch</option>
+					<option>Manchester</option>
+					<option>Evansville</option>
+					<option>South Fulton</option>
+					<option>East Los Angeles</option>
+					<option>Brandon</option>
+					<option>Goodyear</option>
+					<option>Concord</option>
+					<option>Berkeley</option>
+					<option>Temecula</option>
+					<option>Carlsbad</option>
+					<option>Westminster</option>
+					<option>Pompano Beach</option>
+					<option>Lansing</option>
+					<option>Tyler</option>
+					<option>Springfield</option>
+					<option>Richmond</option>
+					<option>Provo</option>
+					<option>Lowell</option>
+					<option>Rio Rancho</option>
+					<option>Everett</option>
+					<option>Elgin</option>
+					<option>Conroe</option>
+					<option>Spokane Valley</option>
+					<option>Pueblo</option>
+					<option>Odessa</option>
+					<option>Santa Maria</option>
+					<option>Jurupa Valley</option>
+					<option>Sparks</option>
+					
+					<option>Afghanistan</option>
+					<option>Albania</option>
+					<option>Algeria</option>
+					<option>Andorra</option>
+					<option>Angola</option>
+					<option>Antigua and Barbuda</option>
+					<option>Argentina</option>
+					<option>Armenia</option>
+					<option>Australia</option>
+					<option>Austria</option>
+					<option>Azerbaijan</option>
+					<option>The Bahamas</option>
+					<option>Bahrain</option>
+					<option>Bangladesh</option>
+					<option>Barbados</option>
+					<option>Belarus</option>
+					<option>Belgium</option>
+					<option>Belize</option>
+					<option>Benin</option>
+					<option>Bhutan</option>
+					<option>Bolivia</option>
+					<option>Bosnia and Herzegovina</option>
+					<option>Botswana</option>
+					<option>Brazil</option>
+					<option>Brunei</option>
+					<option>Bulgaria</option>
+					<option>Burkina Faso</option>
+					<option>Burundi</option>
+					<option>Cabo Verde</option>
+					<option>Cambodia</option>
+					<option>Cameroon</option>
+					<option>Canada</option>
+					<option>Central African Republic</option>
+					<option>Chad</option>
+					<option>Chile</option>
+					<option>China</option>
+					<option>Colombia</option>
+					<option>Comoros</option>
+					<option>Congo, Democratic Republic of the</option>
+					<option>Congo, Republic of the</option>
+					<option>Costa Rica</option>
+					<option>Côte d’Ivoire</option>
+					<option>Croatia</option>
+					<option>Cuba</option>
+					<option>Cyprus</option>
+					<option>Czech Republic</option>
+					<option>Denmark</option>
+					<option>Djibouti</option>
+					<option>Dominica</option>
+					<option>Dominican Republic</option>
+					<option>East Timor (Timor-Leste)</option>
+					<option>Ecuador</option>
+					<option>Egypt</option>
+					<option>El Salvador</option>
+					<option>Equatorial Guinea</option>
+					<option>Eritrea</option>
+					<option>Estonia</option>
+					<option>Eswatini</option>
+					<option>Ethiopia</option>
+					<option>Fiji</option>
+					<option>Finland</option>
+					<option>France</option>
+					<option>Gabon</option>
+					<option>The Gambia</option>
+					<option>Georgia</option>
+					<option>Germany</option>
+					<option>Ghana</option>
+					<option>Greece</option>
+					<option>Grenada</option>
+					<option>Guatemala</option>
+					<option>Guinea</option>
+					<option>Guinea-Bissau</option>
+					<option>Guyana</option>
+					<option>Haiti</option>
+					<option>Honduras</option>
+					<option>Hungary</option>
+					<option>Iceland</option>
+					<option>India</option>
+					<option>Indonesia</option>
+					<option>Iran</option>
+					<option>Iraq</option>
+					<option>Ireland</option>
+					<option>Israel</option>
+					<option>Italy</option>
+					<option>Jamaica</option>
+					<option>Japan</option>
+					<option>Jordan</option>
+					<option>Kazakhstan</option>
+					<option>Kenya</option>
+					<option>Kiribati</option>
+					<option>Korea, North</option>
+					<option>Korea, South</option>
+					<option>Kosovo</option>
+					<option>Kuwait</option>
+					<option>Kyrgyzstan</option>
+					<option>Laos</option>
+					<option>Latvia</option>
+					<option>Lebanon</option>
+					<option>Lesotho</option>
+					<option>Liberia</option>
+					<option>Libya</option>
+					<option>Liechtenstein</option>
+					<option>Lithuania</option>
+					<option>Luxembourg</option>
+					<option>Madagascar</option>
+					<option>Malawi</option>
+					<option>Malaysia</option>
+					<option>Maldives</option>
+					<option>Mali</option>
+					<option>Malta</option>
+					<option>Marshall Islands</option>
+					<option>Mauritania</option>
+					<option>Mauritius</option>
+					<option>Mexico</option>
+					<option>Micronesia, Federated States of</option>
+					<option>Moldova</option>
+					<option>Monaco</option>
+					<option>Mongolia</option>
+					<option>Montenegro</option>
+					<option>Morocco</option>
+					<option>Mozambique</option>
+					<option>Myanmar (Burma)</option>
+					<option>Namibia</option>
+					<option>Nauru</option>
+					<option>Nepal</option>
+					<option>Netherlands</option>
+					<option>New Zealand</option>
+					<option>Nicaragua</option>
+					<option>Niger</option>
+					<option>Nigeria</option>
+					<option>North Macedonia</option>
+					<option>Norway</option>
+					<option>Oman</option>
+					<option>Pakistan</option>
+					<option>Palau</option>
+					<option>Panama</option>
+					<option>Papua New Guinea</option>
+					<option>Paraguay</option>
+					<option>Peru</option>
+					<option>Philippines</option>
+					<option>Poland</option>
+					<option>Portugal</option>
+					<option>Qatar</option>
+					<option>Romania</option>
+					<option>Russia</option>
+					<option>Rwanda</option>
+					<option>Saint Kitts and Nevis</option>
+					<option>Saint Lucia</option>
+					<option>Saint Vincent and the Grenadines</option>
+					<option>Samoa</option>
+					<option>San Marino</option>
+					<option>Sao Tome and Principe</option>
+					<option>Saudi Arabia</option>
+					<option>Senegal</option>
+					<option>Serbia</option>
+					<option>Seychelles</option>
+					<option>Sierra Leone</option>
+					<option>Singapore</option>
+					<option>Slovakia</option>
+					<option>Slovenia</option>
+					<option>Solomon Islands</option>
+					<option>Somalia</option>
+					<option>South Africa</option>
+					<option>Spain</option>
+					<option>Sri Lanka</option>
+					<option>Sudan</option>
+					<option>Sudan, South</option>
+					<option>Suriname</option>
+					<option>Sweden</option>
+					<option>Switzerland</option>
+					<option>Syria</option>
+					<option>Taiwan</option>
+					<option>Tajikistan</option>
+					<option>Tanzania</option>
+					<option>Thailand</option>
+					<option>Togo</option>
+					<option>Tonga</option>
+					<option>Trinidad and Tobago</option>
+					<option>Tunisia</option>
+					<option>Turkey</option>
+					<option>Turkmenistan</option>
+					<option>Tuvalu</option>
+					<option>Uganda</option>
+					<option>Ukraine</option>
+					<option>United Arab Emirates</option>
+					<option>United Kingdom</option>
+					<option>United States</option>
+					<option>Uruguay</option>
+					<option>Uzbekistan</option>
+					<option>Vanuatu</option>
+					<option>Vatican City</option>
+					<option>Venezuela</option>
+					<option>Vietnam</option>
+					<option>Yemen</option>
+					<option>Zambia</option>
+					<option>Zimbabwe</option>
+
+					<option>Alaska</option>
+					<option>Alabama</option>
+					<option>Arkansas</option>
+					<option>American Samoa</option>
+					<option>Arizona</option>
+					<option>California</option>
+					<option>Colorado</option>
+					<option>Connecticut</option>
+					<option>District </option>
+					<option>of Columbia</option>
+					<option>Delaware</option>
+					<option>Florida</option>
+					<option>Georgia</option>
+					<option>Guam</option>
+					<option>Hawaii</option>
+					<option>Iowa</option>
+					<option>Idaho</option>
+					<option>Illinois</option>
+					<option>Indiana</option>
+					<option>Kansas</option>
+					<option>Kentucky</option>
+					<option>Louisiana</option>
+					<option>Massachusetts</option>
+					<option>Maryland</option>
+					<option>Maine</option>
+					<option>Michigan</option>
+					<option>Minnesota</option>
+					<option>Missouri</option>
+					<option>Mississippi</option>
+					<option>Montana</option>
+					<option>North Carolina</option>
+					<option>North Dakota</option>
+					<option>Nebraska</option>
+					<option>New Hampshire</option>
+					<option>New Jersey</option>
+					<option>New Mexico</option>
+					<option>Nevada</option>
+					<option>New York</option>
+					<option>Ohio</option>
+					<option>Oklahoma</option>
+					<option>Oregon</option>
+					<option>Pennsylvania</option>
+					<option>Puerto Rico</option>
+					<option>Rhode Island</option>
+					<option>South Carolina</option>
+					<option>South Dakota</option>
+					<option>Tennessee</option>
+					<option>Texas</option>
+					<option>Utah</option>
+					<option>Virginia</option>
+					<option>Virgin Islands</option>
+					<option>Vermont</option>
+					<option>Washington</option>
+					<option>Wisconsin</option>
+					<option>West Virginia</option>
+					<option>Wyoming</option>
+				</template>
+                <input id="cityInput" name = 'cityInput' placeholder="Enter A Country, City, Or State" type="text" list = "resultList"/>
+				<datalist id="resultList">
+					<option></option>	
+				</datalist>
+                <button id="cityBut" for="cityInput"  type="submit">
                   Search Place
                 </button>
             </div>
@@ -41,58 +1366,30 @@
           <p style = "color: red"><b>That place does not exist, please try again</b></p>
           {% endfor %}
          </div>
-         <div class = 'col-3' style = 'margin-top: 10px; width: 50vw'>
+         <div class = 'col-4'>
           <a href="/">
-            <button type="button" style = "
-                  background-color: #000000; /* Green */
-                    border: none;
-                    color: rgb(255, 255, 255);
-                    padding: 5px 15px;
-                    text-align: center;
-                    text-decoration: none;
-                    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                    display: inline-block;
-                    font-size: 16px;">
-                    
+            <button id="tempBut" type="button">
                 Temperature Map
             </button>
             </a>
             <a href="windmap">
-              <button type="button" style = "
-                    background-color: #555555; /* Green */
-                      border: none;
-                      color: rgb(255, 255, 255);
-                      padding: 5px 15px;
-                      text-align: center;
-                      text-decoration: none;
-                      display: inline-block;
-                      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                      font-size: 16px;">
+              <button id = "windBut" type="button">
                   Wind Map
               </button>
             </a>
-            <a href="windmap">
-              <button type="button" style = "
-                    background-color: #b96300; /* Green */
-                      border: none;
-                      color: rgb(255, 255, 255);
-                      padding: 5px 15px;
-                      text-align: center;
-                      text-decoration: none;
-                      display: inline-block;
-                      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                      font-size: 16px;">
+            <a href="humiditymap">
+              <button id = "humidBut" type="button">
                   Humidity Map
               </button>
             </a>
          </div>
         </div>
           
-        <div class = 'col-3' Style="transform: translate(0%, 10%); background-image:linear-gradient(rgb(226, 230, 170), white);border-radius: px; margin-left: 5%; height: relative; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+        <div id="cityInfo" class = 'col-3'>
           
           <h1><b>{{ city_weather_update.city}}</b></h1>
           <h5><b>Description: </b>{{ city_weather_update.description}}</h5>
-          <h5><b>Temperature: </b>{{ city_weather_update.temperature}}</h5>
+          <h5><b>Temperature: </b>{{ city_weather_update.temperatureF}} | {{ city_weather_update.temperature}}</h5>
           <h5><b>Wind: </b>{{ city_weather_update.wind}}</h5>
           <h5><b>Humidity: </b>{{ city_weather_update.humidity}}</h5>
           <h3><b>Places to visit in {{ city_weather_update.city }}</b></h3>
@@ -100,8 +1397,6 @@
             <h5>{{ l }}</h5>
           {% endfor %}
         </div>
-  <!--     </div> -->
-     <!--</ div >-->
-    </div>
+		<script src="{% static '/datalist.js' %}"></script>
   </body>
   </html>

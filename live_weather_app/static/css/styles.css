@@ -2,9 +2,90 @@
  * Always set the map height explicitly to define the size of the div element
  * that contains the map. 
  */
-#map {
+ #map {
     height: 100%;
+	width:100%;
+	position:absolute;
 }
+#searchPlace{
+	width: 100%;
+}
+#cityInput{
+	width: 15vw; 
+	margin-top: 10px; 
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+#cityBut{
+	background-color: #555555;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+#tempBut{
+	background-color: #000000; /* Green */
+	border: none;
+	color: rgb(255, 255, 255);
+	padding: 5px 15px;
+	text-align: center;
+	text-decoration: none;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	display: inline-block;
+	font-size: 16px;
+}
+#windBut{
+	background-color: #555555; /* Green */
+	border: none;
+	color: rgb(255, 255, 255);
+	padding: 5px 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: 16px;
+}
+#humidBut{
+	background-color: #b96300; /* Green */
+	border: none;
+	color: rgb(255, 255, 255);
+	padding: 5px 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: 16px;
+}
+#cityInfo{
+	transform: translate(0%, 10%); 
+	background-image:linear-gradient(rgb(226, 230, 170), white);
+	border-radius: px; 
+	margin-left: 5%; 
+	height: relative; 
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.row{
+	transform: translate(5%,0%);
+	position:relative;
+	margin:0;
+	padding:0; 
+	width: 90%;
+}
+
+.col-3{
+	margin-top: 10px; 
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	width: 50vw;
+}
+
+.col-6{
+	text-align: center; 
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+
 
 .btn-primary {
     background-color: transparent;

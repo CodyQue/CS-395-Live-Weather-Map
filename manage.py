@@ -22,7 +22,7 @@ def scrapeInfoToDB():
         print('Start')
         connection = sqlite3.connect("db.sqlite3")
         cur = connection.cursor()
-        count = 0
+        #count = 0
         with open('cities.txt', 'r', encoding='utf-8') as file:
             reader = file.readlines()
             for place in reader:
@@ -61,12 +61,13 @@ def scrapeInfoToDB():
                         #print(count)
                     else:
                         print(e)
-                count += 1
-                if (count >= 55):
+                #count += 1
+                time.sleep(3)
+                #if (count >= 55):
                     #print("SLEEP")
-                    time.sleep(60)
+                    #time.sleep(60)
                     #print("Wake up")
-                    count = 0
+                    #count = 0
         deleteFromTimesTable = '''UPDATE live_weather_app_lasttimeupdated
         SET date = ?
         WHERE id = 1''' #Updates last time the database was updated

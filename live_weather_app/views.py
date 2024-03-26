@@ -8,6 +8,7 @@ import requests
 import json
 from datetime import datetime
 from .models import Place, lastTimeUpdated
+#from live_weather_app.models import Place, lastTimeUpdated
 import os
 
 class NewCity(forms.Form):
@@ -18,17 +19,27 @@ def get_geolocation(): # gets user ip and finds location.
     resp = requests.get(url)
     return [resp.json()["location"]["latitude"], resp.json()["location"]["longitude"]]
 
+def getWindIcon(item):
+    if item < 12:
+        return 'lightwind.png'
+    elif item >= 12 and item < 39:
+        return 'moderatewind.png'
+    else:
+        return 'strongwind.png'
+    
 def get_weather_info(city):
     API_KEY = 'cdac524628de1773c07153a946813a62'
     url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric'
     global city_weather_update 
     try:
         response = requests.get(url).json()
+        print(response['name'])
         city_weather_update = {
-            'city': city,
+            'city': response['name'],
             'description': response['weather'][0]['description'],
             'icon': response['weather'][0]['icon'],
             'temperature': str(response['main']['temp']) + ' °C',
+            'temperatureF' : str(int(response['main']['temp'] * 1.8) + 32) + ' °F',
             'country_code': response['sys']['country'],
             'wind': str(response['wind']['speed']) + 'km/h',
             'humidity': str(response['main']['humidity']) + '%',
@@ -37,7 +48,23 @@ def get_weather_info(city):
             'lat' : response['coord']['lat'],
             'iconWeb' : "https://openweathermap.org/img/wn/" + response['weather'][0]['icon'] + "@2x.png",
         }
-    except Exception as e:
+        try:
+            p = Place.objects.get(name = response['name'])
+        except Exception as e: # This adds a place to the database if it cannot find it in the database
+            print("Adding to db")
+            p = Place(name = response['name'], 
+                      description = response['weather'][0]['description'],
+                      temperature = str(response['main']['temp']) + ' °C',
+                      wind = str(response['wind']['speed']) + 'km/h',
+                      humidity = str(response['main']['humidity']) + '%',
+                      iconWeb = city_weather_update['iconWeb'],
+                      lat = city_weather_update['lat'],
+                      long = city_weather_update['lon'],
+                      lastUpdated = datetime.now().strftime("%A, %B %d %Y, %H:%M:%S %p"),
+                      windIcon = getWindIcon(response['wind']['speed'])
+                      )
+            p.save()
+    except Exception as e: # This is for if the user puts in a place that does not exist
         city_weather_update = None
 
 # Map for the index.html page
@@ -59,7 +86,6 @@ def map(request):
         print("Error")
         mapType = 'Temperature'
         get_weather_info('Fairfax')
-        URLlink = 'home/index.html'
         zoomLevel = 1
         errorPlace = []
         errorPlace.append("Place")
@@ -75,7 +101,7 @@ def map(request):
         "zoomLevel" : zoomLevel,
         "errorPlace" : errorPlace
     }
-    print(context)
+    #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
     return render(request, URLlink, context)
 
@@ -98,7 +124,6 @@ def windmap(request):
         print("Error")
         mapType = 'Wind'
         get_weather_info('Fairfax')
-        URLlink = 'home/windmap.html'
         zoomLevel = 1
         errorPlace = []
         errorPlace.append("Place")
@@ -114,13 +139,16 @@ def windmap(request):
         "zoomLevel" : zoomLevel,
         "errorPlace" : errorPlace
     }
-    print(context)
+    #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
     return render(request, URLlink, context)
 
 # Humidity map function
 def humiditymap(request):
+    URLlink = 'home/humidity.html'
     zoomLevel = 1
+    mapType = 'Humidity'
+    errorPlace = []
     if not request.method == "POST":
         get_weather_info('Fairfax')
 
@@ -130,6 +158,13 @@ def humiditymap(request):
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
             zoomLevel = 13.5
+    if city_weather_update == None: #If the place does not exist
+        print("Error")
+        mapType = 'Humidity'
+        get_weather_info('Fairfax')
+        zoomLevel = 1
+        errorPlace = []
+        errorPlace.append("Place")
     list_places = travel_advisor()
     if len(list_places) == 0:
         list_places.append("None")
@@ -138,13 +173,13 @@ def humiditymap(request):
         "place" : Place.objects.all(),
         "list_places": list_places,
         "date": lastTimeUpdated.objects.all().first(),
-        "mapType" : 'Humidity',
+        "mapType" : mapType,
         "zoomLevel" : zoomLevel,
         "errorPlace" : errorPlace
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
-    return render(request, 'home/windmap.html', context)
+    return render(request, URLlink, context)
 
 def get_place_id(city):
     url = f"https://api.geoapify.com/v1/geocode/search?text={city}&format=json&apiKey=09008c734555433dbf212c6c61ebea3b"
@@ -156,7 +191,7 @@ def travel_advisor():
     curr_city = city_weather_update["city"]
     city_id = get_place_id(curr_city)
     resp = get_places(city_id)
-    print(json.dumps(resp, indent=2))
+    #print(json.dumps(resp, indent=2))
     for i in resp["features"]:
         try:
             list_places.append(i["properties"]["name"])
