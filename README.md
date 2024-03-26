@@ -1,5 +1,5 @@
 # CS 395: Live Weather Map!
-## By Cody, Anthony, Sid, Abhay
+#### By Cody, Anthony, Sid, Abhay
 Welcome! The objective of the website is to view different weather patterns around the world! The website consists of tracking the current temperature, wind speeds, and humidity percentages.
 
 ## Make sure a virtual environemnt is used:
