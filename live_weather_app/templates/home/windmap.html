@@ -42,7 +42,8 @@
           image: new ol.style.Icon({
             anchor: [0.2, 0.5],
             crossOrigin: 'anonymous',
-            src: "{% static p.windIcon %}"
+            src: "{% static p.windIcon %}",
+            scale: 0.5,
           })
         })
       }))

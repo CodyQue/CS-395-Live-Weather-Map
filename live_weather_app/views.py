@@ -33,7 +33,7 @@ def get_weather_info(city): # Used to fetch weather information using the OpenWe
     global city_weather_update 
     try:
         response = requests.get(url).json()
-        print(response['name'])
+        #print(response)
         city_weather_update = {
             'city': response['name'],
             'description': response['weather'][0]['description'],
@@ -67,8 +67,7 @@ def get_weather_info(city): # Used to fetch weather information using the OpenWe
     except Exception as e: # This is for if the user puts in a place that does not exist
         city_weather_update = None
 
-# Map for the index.html page
-def map(request):
+def map(request): # Map for the index.html page
     URLlink = 'home/index.html'
     zoomLevel = 1
     mapType = 'Temperature'
@@ -105,8 +104,7 @@ def map(request):
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
     return render(request, URLlink, context)
 
-# Map for the windmap.html page
-def windmap(request):
+def windmap(request): # Map for the windmap.html page
     URLlink = 'home/windmap.html'
     zoomLevel = 1
     mapType = 'Wind'
@@ -143,8 +141,7 @@ def windmap(request):
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
     return render(request, URLlink, context)
 
-# Humidity map function
-def humiditymap(request):
+def humiditymap(request): # Map for the humidity.html page
     URLlink = 'home/humidity.html'
     zoomLevel = 1
     mapType = 'Humidity'
