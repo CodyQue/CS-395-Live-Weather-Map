@@ -5,11 +5,20 @@ Welcome! The objective of the website is to view different weather patterns arou
 It is required to use a virtual environment to run the web application (since the website requires using Django)
 
 ## Libraries Required
-All of the libraries are stored in *requirements.txt*. Use this command to install the necessary requirements:
+These are some of the external libraries used for the full-stack project:
+- requests
+- django-bootstrap-v5
+- Django
 
+All of the libraries are stored in *requirements.txt*. Use this command to install the necessary requirements:
 #### `pip3 install -r requirements.txt`
 
 Make sure you are in the *live_weather_app* directory to run the pip command.
+
+## Running the web application on localhost
+Make sure you are still in the *live_weather_app*. To host the web application locally, run this command:
+#### `python manage.py runserver`
+
 
 ### Sources used
 <a href="https://thepythoncode.com/article/weather-app-django-openweather-api-using-python">Python Django Weather App Tutorial</a>
