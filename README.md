@@ -2,9 +2,7 @@
 #### By Cody, Anthony, Sid, Abhay
 Welcome! The objective of the website is to view different weather patterns around the world! The website consists of tracking the current temperature, wind speeds, and humidity percentages.
 
-**NOTE**: This website is recommended to be used on Google Chrome.
-
-## Make sure a virtual environemnt is used:
+## Make sure a virtual environment is used:
 It is required to use a virtual environment to run the web application (since the website requires using Django)
 
 ## Libraries Required
@@ -16,8 +14,10 @@ These are some of the external libraries used for the full-stack project:
 All of the libraries are stored in *requirements.txt*. Use this command to install the necessary requirements:
 #### `pip3 install -r requirements.txt`
 
+Make sure you are in the *live_weather_app* directory to run the pip command.
+
 ## Running the web application on localhost
-To host the web application locally, run this command:
+Make sure you are still in the *live_weather_app*. To host the web application locally, run this command:
 #### `python manage.py runserver`
 
 ## API's Used / External Resources
@@ -34,6 +34,19 @@ The back-end consists of using Django and Python. This is used to fetch the data
 
 ## Database
 This project utilizes SQLite3 to store/manage weather data. Data gets manipulated in the separate Python script, but data gets also added when a user finds a place that the database does not have.
+
+## Features
+The map is from Maptilers API which is a free, open source map for developers to use. Open Weather API is shown on the left of the map and displays the location's current weather information when searched. The Trip Advisor is shown under the weather information that provides possible places to visit.
+![washingtonexample](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/366753da-ab4c-46bb-9d76-347b718e1994)
+
+
+We repurposed an earthquake heat map to display humidity data instead. It is completed through the use of JavaScript and HTML to manipulate the visualization of the heat map. The data will keep updating dynamically and shows the most updated humidity levels.
+
+![2024-03-2621-03-17-ezgif com-video-to-gif-converter (1)](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/db074a66-96c7-434d-b54e-985e2f350454)
+
+The search bar features locations and gives some example places depending on the text given. If there were none listed, it will be added to the possible locations.
+
+![2024-03-2621-32-05online-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/10baf22c-6b2d-4aa9-815f-13573c2cb8b6)
 
 ### Sources used
 <a href="https://thepythoncode.com/article/weather-app-django-openweather-api-using-python">Python Django Weather App Tutorial</a
