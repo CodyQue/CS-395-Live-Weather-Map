@@ -41,9 +41,11 @@ The map is from Maptilers API which is a free, open source map for developers to
 
 
 We repurposed an earthquake heat map to display humidity data instead. It is completed through the use of JavaScript and HTML to manipulate the visualization of the heat map. The data will keep updating dynamically and shows the most updated humidity levels.
+
 ![2024-03-2621-03-17-ezgif com-video-to-gif-converter](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/8756c465-54e7-485b-a22e-b2841fea15b6)
 
 The search bar features locations and gives some example places depending on the text given. If there were none listed, it will be added to the possible locations.
+
 ![2024-03-2621-03-17-ezgif com-video-to-gif-converter](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/0af32ef3-840f-48c6-86a2-7bb593ebe95a)
 
 ### Sources used
