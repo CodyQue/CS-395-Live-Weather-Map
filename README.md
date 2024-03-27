@@ -64,3 +64,5 @@ The search bar features locations and gives some example places depending on the
 <a href="https://icons8.com/icon/set/wind-level/group-ui">Wind Level Icons</a>
 
 <a href="https://openlayers.org/en/latest/examples/heatmap-earthquakes.html">OpenLayers Heatmap</a>
+
+<a href="https://www.geoapify.com/">Geoapify API Website</a>
