@@ -2,7 +2,7 @@
 #### By Cody, Anthony, Sid, Abhay
 Welcome! The objective of the website is to view different weather patterns around the world! The website consists of tracking the current temperature, wind speeds, and humidity percentages.
 
-## Make sure a virtual environemnt is used:
+## Make sure a virtual environment is used:
 It is required to use a virtual environment to run the web application (since the website requires using Django)
 
 ## Libraries Required
@@ -34,6 +34,17 @@ The back-end consists of using Django and Python. This is used to fetch the data
 
 ## Database
 This project utilizes SQLite3 to store/manage weather data. Data gets manipulated in the separate Python script, but data gets also added when a user finds a place that the database does not have.
+
+## Features
+The map is from Maptilers API which is a free, open source map for developers to use. Open Weather API is shown on the left of the map and displays the location's current weather information when searched. The Trip Advisor is shown under the weather information that provides possible places to visit.
+![washingtonexample](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/366753da-ab4c-46bb-9d76-347b718e1994)
+
+
+We repurposed an earthquake heat map to display humidity data instead. It is completed through the use of JavaScript and HTML to manipulate the visualization of the heat map. The data will keep updating dynamically and shows the most updated humidity levels.
+![2024-03-2621-03-17-ezgif com-video-to-gif-converter](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/8756c465-54e7-485b-a22e-b2841fea15b6)
+
+The search bar features locations and gives some example places depending on the text given. If there were none listed, it will be added to the possible locations.
+![2024-03-2621-03-17-ezgif com-video-to-gif-converter](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/0af32ef3-840f-48c6-86a2-7bb593ebe95a)
 
 ### Sources used
 <a href="https://thepythoncode.com/article/weather-app-django-openweather-api-using-python">Python Django Weather App Tutorial</a
