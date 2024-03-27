@@ -2,6 +2,8 @@
 #### By Cody, Anthony, Sid, Abhay
 Welcome! The objective of the website is to view different weather patterns around the world! The website consists of tracking the current temperature, wind speeds, and humidity percentages.
 
+**NOTE**: This website is recommended to be used on Google Chrome.
+
 ## Make sure a virtual environemnt is used:
 It is required to use a virtual environment to run the web application (since the website requires using Django)
 
@@ -14,10 +16,8 @@ These are some of the external libraries used for the full-stack project:
 All of the libraries are stored in *requirements.txt*. Use this command to install the necessary requirements:
 #### `pip3 install -r requirements.txt`
 
-Make sure you are in the *live_weather_app* directory to run the pip command.
-
 ## Running the web application on localhost
-Make sure you are still in the *live_weather_app*. To host the web application locally, run this command:
+To host the web application locally, run this command:
 #### `python manage.py runserver`
 
 ## API's Used / External Resources

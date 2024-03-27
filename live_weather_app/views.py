@@ -33,7 +33,7 @@ def get_weather_info(city): # Used to fetch weather information using the OpenWe
     global city_weather_update 
     try:
         response = requests.get(url).json()
-        #print(response)
+        print(response['name'])
         city_weather_update = {
             'city': response['name'],
             'description': response['weather'][0]['description'],
