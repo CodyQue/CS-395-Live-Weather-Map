@@ -48,6 +48,9 @@ The search bar features locations and gives some example places depending on the
 
 ![2024-03-2621-14-59-ezgif com-video-to-gif-converter](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/33b72265-701e-41f8-bc13-307944ec34ae)
 
+![2024-03-2621-03-17-ezgif com-video-to-gif-converter](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/7f08adfe-f6f3-4a47-b66b-8280e9e87085)
+
+
 
 ### Sources used
 <a href="https://thepythoncode.com/article/weather-app-django-openweather-api-using-python">Python Django Weather App Tutorial</a
