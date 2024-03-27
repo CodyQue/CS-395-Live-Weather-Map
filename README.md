@@ -46,8 +46,7 @@ We repurposed an earthquake heat map to display humidity data instead. It is com
 
 The search bar features locations and gives some example places depending on the text given. If there were none listed, it will be added to the possible locations.
 
-![2024-03-2621-14-59-ezgif com-video-to-gif-converter (1)](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/9bb225b0-0718-4960-91b8-d2811675fdc9)
-
+![2024-03-2621-32-05online-video-cutter com-ezgif com-video-to-gif-converter](https://github.com/CodyQue/CS-395-Live-Weather-Map/assets/156840927/10baf22c-6b2d-4aa9-815f-13573c2cb8b6)
 
 ### Sources used
 <a href="https://thepythoncode.com/article/weather-app-django-openweather-api-using-python">Python Django Weather App Tutorial</a
