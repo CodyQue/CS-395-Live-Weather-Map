@@ -98,6 +98,6 @@ def main():
 
 
 if __name__ == '__main__':
-    p1 = Process(target=scrapeInfoToDB)
-    p1.start()
+    #p1 = Process(target=scrapeInfoToDB)
+    #p1.start()
     main()

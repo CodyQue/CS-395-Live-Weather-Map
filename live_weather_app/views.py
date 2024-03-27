@@ -69,7 +69,7 @@ def get_weather_info(city): # Used to fetch weather information using the OpenWe
 
 def map(request): # Map for the index.html page
     URLlink = 'home/index.html'
-    zoomLevel = 1
+    zoomLevel = 4
     mapType = 'Temperature'
     errorPlace = []
     if not request.method == "POST":
@@ -98,7 +98,8 @@ def map(request): # Map for the index.html page
         "date": lastTimeUpdated.objects.all().first(),
         "mapType" : mapType,
         "zoomLevel" : zoomLevel,
-        "errorPlace" : errorPlace
+        "errorPlace" : errorPlace,
+        "emoji" : "☀️"
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
@@ -106,7 +107,7 @@ def map(request): # Map for the index.html page
 
 def windmap(request): # Map for the windmap.html page
     URLlink = 'home/windmap.html'
-    zoomLevel = 1
+    zoomLevel = 4
     mapType = 'Wind'
     errorPlace = []
     if not request.method == "POST":
@@ -135,7 +136,8 @@ def windmap(request): # Map for the windmap.html page
         "date": lastTimeUpdated.objects.all().first(),
         "mapType" : mapType,
         "zoomLevel" : zoomLevel,
-        "errorPlace" : errorPlace
+        "errorPlace" : errorPlace,
+        "emoji" : "🌬"
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
@@ -143,7 +145,7 @@ def windmap(request): # Map for the windmap.html page
 
 def humiditymap(request): # Map for the humidity.html page
     URLlink = 'home/humidity.html'
-    zoomLevel = 1
+    zoomLevel = 4
     mapType = 'Humidity'
     errorPlace = []
     if not request.method == "POST":
@@ -172,7 +174,8 @@ def humiditymap(request): # Map for the humidity.html page
         "date": lastTimeUpdated.objects.all().first(),
         "mapType" : mapType,
         "zoomLevel" : zoomLevel,
-        "errorPlace" : errorPlace
+        "errorPlace" : errorPlace,
+        "emoji" : "💧"
     }
     #print(context)
     print("Last Updated: ", lastTimeUpdated.objects.all().first())
