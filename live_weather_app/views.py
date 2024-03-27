@@ -80,7 +80,7 @@ def map(request): # Map for the index.html page
         if form.is_valid():
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
-            zoomLevel = 13.5
+            zoomLevel = 8
     if city_weather_update == None: #If the place does not exist
         print("Error")
         mapType = 'Temperature'
@@ -118,7 +118,7 @@ def windmap(request): # Map for the windmap.html page
         if form.is_valid():
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
-            zoomLevel = 13.5
+            zoomLevel = 8
     if city_weather_update == None: #If the place does not exist
         print("Error")
         mapType = 'Wind'
@@ -156,7 +156,7 @@ def humiditymap(request): # Map for the humidity.html page
         if form.is_valid():
             cityInput = form.cleaned_data["cityInput"]
             get_weather_info(cityInput)
-            zoomLevel = 13.5
+            zoomLevel = 8
     if city_weather_update == None: #If the place does not exist
         print("Error")
         mapType = 'Humidity'
