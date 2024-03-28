@@ -98,6 +98,6 @@ def main():
 
 
 if __name__ == '__main__':
-    p1 = Process(target=scrapeInfoToDB) # This runs the Python back-end program on a separate process (this is used to fetch data and put it onto the DB)
-    p1.start()
+    #p1 = Process(target=scrapeInfoToDB) # This runs the Python back-end program on a separate process (this is used to fetch data and put it onto the DB)
+    #p1.start()
     main()
