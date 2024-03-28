@@ -1,81 +1,95 @@
 {% load static %}
 
 <html>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+
 <head>
   <title>Live Weather Radar / Predictor</title>
   <script src="https://cdn.jsdelivr.net/npm/ol@v9.0.0/dist/ol.js"></script>
   <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
- <link rel="stylesheet" href="static/css/styles.css">
- <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="static/css/styles.css">
+  <link rel="stylesheet" href="static/css/styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.0.0/ol.css">
   {% load bootstrap5 %}
   {% bootstrap_css %}
   {% bootstrap_javascript %}
 </head>
+
 <body>
-    
-    {% block content %}
-    {% endblock %}
-    <div class = 'row'>
-      <div class = 'col-3' id="mapTypeDiv">
-        <h4><b>CS 395: Live Weather Map</b></h4>
-        <h5>{{emoji}} <b>{{mapType}}</b> Map {{emoji}}</h5>
-        <p><b>Last Updated:</b> {{ date.date }}</p>
-        </div>
-        <div class = 'col-6'>
-          <form method="post">
-            <div id="searchPlace">
-                {% csrf_token %}
-				<template id="allPlaces">
-          {% for p in place %}
+
+  {% block content %}
+  {% endblock %}
+  <div class='row'>
+    <div class='col-3' id="mapTypeDiv">
+      <h4><b>CS 395: Live Weather Map</b></h4>
+      <h5>{{emoji}} <b>{{mapType}}</b> Map {{emoji}}</h5>
+      <p><b>Last Updated:</b> {{ date.date }}</p>
+    </div>
+    <div class='col-6'>
+      <form method="post">
+        <div id="searchPlace">
+          {% csrf_token %}
+          <template id="allPlaces">
+            {% for p in place %}
             <option>{{p.name}}</option>
-          {% endfor %}
-				</template>
-                <input id="cityInput" name = 'cityInput' placeholder="Enter A Country, City, Or State" type="text" list = "resultList"/>
-				<datalist id="resultList">
-					<option></option>	
-				</datalist>
-                <button id="cityBut" for="cityInput"  type="submit">
-                  Search Place
-                </button>
-            </div>
-          </form>
-          {% for i in errorPlace%}
-          <p style = "color: red"><b>That place does not exist, please try again</b></p>
-          {% endfor %}
-         </div>
-         <div class = 'col-4'>
-          <a href="/">
-            <button id="tempBut" type="button">
-                Temperature Map
-            </button>
-            </a>
-            <a href="windmap">
-              <button id = "windBut" type="button">
-                  Wind Map
-              </button>
-            </a>
-            <a href="humiditymap">
-              <button id = "humidBut" type="button">
-                  Humidity Map
-              </button>
-            </a>
-         </div>
+            {% endfor %}
+          </template>
+          <input id="cityInput" name='cityInput' placeholder="Enter A Country, City, Or State" type="text"
+            list="resultList" />
+          <datalist id="resultList">
+            <option></option>
+          </datalist>
+          <button id="cityBut" for="cityInput" type="submit">
+            Search Place
+          </button>
         </div>
-          
-        <div id="cityInfo" class = 'col-3'>
-          
-          <h1><b>{{ city_weather_update.city}}</b></h1>
-          <h5><b>Description: </b>{{ city_weather_update.description}}</h5>
-          <h5><b>Temperature: </b>{{ city_weather_update.temperatureF}} | {{ city_weather_update.temperature}}</h5>
-          <h5><b>Wind: </b>{{ city_weather_update.wind}}</h5>
-          <h5><b>Humidity: </b>{{ city_weather_update.humidity}}</h5>
-          <h3><b>Places to visit in {{ city_weather_update.city }}</b></h3>
-          {% for l in list_places %}
-            <h5>{{ l }}</h5>
-          {% endfor %}
-        </div>
-		<script src="{% static '/datalist.js' %}"></script>
-  </body>
-  </html>
+      </form>
+      {% for i in errorPlace%}
+      <p style="color: red"><b>That place does not exist, please try again</b></p>
+      {% endfor %}
+    </div>
+    <div class='col-4'>
+      <a href="/">
+        <button id="tempBut" type="button">
+          Temperature Map
+        </button>
+      </a>
+      <a href="windmap">
+        <button id="windBut" type="button">
+          Wind Map
+        </button>
+      </a>
+      <a href="humiditymap">
+        <button id="humidBut" type="button">
+          Humidity Map
+        </button>
+      </a>
+    </div>
+  </div>
+
+  <div id="cityInfo" class='card col-3'>
+    <div class="card-header">
+      <h1><b>{{ city_weather_update.city}}</b></h1>
+    </div>
+    <div class="card-body">
+      <h5><b>Description: </b>{{ city_weather_update.description}}</h5>
+      <h5><b>Temperature: </b>{{ city_weather_update.temperatureF}} | {{ city_weather_update.temperature}}</h5>
+      <h5><b>Wind: </b>{{ city_weather_update.wind}}</h5>
+      <h5><b>Humidity: </b>{{ city_weather_update.humidity}}</h5>
+      <h3><b>Places to visit in {{ city_weather_update.city }}</b></h3>
+      <ul>
+        {% for l in list_places %}
+        <li>{{ l }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <script src="{% static '/datalist.js' %}"></script>
+</body>
+
+</html>
