@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v9.0.0/ol.css">
   {% load bootstrap5 %}
   {% bootstrap_css %}
+  {% load bootstrap_icons %}
   {% bootstrap_javascript %}
 </head>
 
@@ -26,7 +27,7 @@
   {% endblock %}
   <div class='row'>
     <div class='col-3' id="mapTypeDiv">
-      <h4><b>CS 395: Live Weather Map</b></h4>
+      <h4><b>Live Weather Map</b></h4>
       <h5>{{emoji}} <b>{{mapType}}</b> Map {{emoji}}</h5>
       <p><b>Last Updated:</b> {{ date.date }}</p>
     </div>
@@ -39,14 +40,16 @@
             <option>{{p.name}}</option>
             {% endfor %}
           </template>
-          <input id="cityInput" name='cityInput' placeholder="Enter A Country, City, Or State" type="text"
-            list="resultList" />
+          <div class="container" id="searchBox">
+            <div id="search-container">
+              <input id="cityInput" name='cityInput' placeholder="Search Place" type="text" list="resultList" />
+              <button id="search-city" for="cityInput" type="submit">{% bs_icon 'search' size='2em' %}</button>
+            </div>
+          </div>
           <datalist id="resultList">
             <option></option>
           </datalist>
-          <button id="cityBut" for="cityInput" type="submit">
-            Search Place
-          </button>
+
         </div>
       </form>
       {% for i in errorPlace%}

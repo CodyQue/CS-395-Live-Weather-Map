@@ -14,17 +14,53 @@
 
 #searchPlace {
 	width: 100%;
+	border-radius: 10px;
+}
+
+#searchBox {
+	width: 20vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgba(255, 255, 255, 0.4);
+	border-radius: 30px;
+}
+
+#search-container {
+	/* border: 1px solid red; */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+#search-container input {
+	background: transparent;
+	border: none;
+	/* height: 100%; */
+	padding-bottom: 12px;
+	font-size: 20;
+	outline: none;
+}
+
+#search-city {
+	background: none;
+	height: 100%;
+	/* border: 1px solid green; */
 }
 
 #cityInput {
-	width: 15vw;
+	width: 80%;
+	height: fit-content;
 	margin-top: 10px;
 	/* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
 }
 
 #cityBut {
-	background-color: #555555;
-	border: none;
+	/* background-color: #555555; */
+	/* border: none; */
+	border-radius: 5px;
+
 	color: white;
 	text-align: center;
 	text-decoration: none;
@@ -35,7 +71,9 @@
 #tempBut {
 	background-color: #000000;
 	/* Green */
-	border: none;
+	/* border: none; */
+	border-radius: 5px;
+
 	color: rgb(255, 255, 255);
 	padding: 5px 15px;
 	text-align: center;
@@ -48,7 +86,8 @@
 #windBut {
 	background-color: #555555;
 	/* Green */
-	border: none;
+	/* border: none; */
+	border-radius: 5px;
 	color: rgb(255, 255, 255);
 	padding: 5px 15px;
 	text-align: center;
@@ -61,7 +100,9 @@
 #humidBut {
 	background-color: #b96300;
 	/* Green */
-	border: none;
+	/* border: none; */
+	border-radius: 5px;
+
 	color: rgb(255, 255, 255);
 	padding: 5px 15px;
 	text-align: center;
@@ -75,7 +116,7 @@
 	transform: translate(5%, 0%);
 	position: relative;
 	margin: 0;
-	padding: 0;
+	padding-top: 15px;
 	width: 90%;
 }
 
@@ -93,7 +134,7 @@
 #cityInfo {
 	transform: translate(0%, 10%);
 	background-image: linear-gradient(rgb(226, 230, 170), white);
-	border-radius: 10px;
+	/* border-radius: 10px; */
 	margin-left: 4%;
 	padding: 5px;
 	height: relative;
@@ -123,4 +164,10 @@ body {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+}
+
+button {
+	/* border: 1px solid currentColor; */
+	border: none;
+	/* border-radius: 5px; */
 }
