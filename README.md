@@ -12,6 +12,7 @@ It is required to use a virtual environment to run the web application (since th
 These are some of the external libraries used for the full-stack project:
 - requests
 - django-bootstrap-v5
+- django-bootstrap-icons
 - Django
 
 All of the libraries are stored in *requirements.txt*. Use this command to install the necessary requirements:
