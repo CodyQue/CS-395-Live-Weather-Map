@@ -2,7 +2,7 @@
 
 #### Github Link: https://github.com/CodyQue/CS-395-Live-Weather-Map
 
-#### By Cody, Anthony, Sid, Abhay
+#### By Cody, Anthony, Sid, and Abhay
 Welcome! The objective of the website is to view different weather patterns around the world! The website consists of tracking the current temperature, wind speeds, and humidity percentages.
 
 ## Make sure a virtual environment is used:
@@ -28,7 +28,7 @@ Make sure you are still in the *live_weather_app*. To host the web application l
 For this project, there were three APIs used: OpenLayers, OpenWeather, GeoAPIfy.
 - The OpenLayers API is used to display the map
 - The OpenWeather API is used to fetch the current weather status of a specific place.
-- The GeoAPIfy is used to fetch activities around places.
+- The Geoapify is used to fetch activities around places.
 
 ## Front-End
 The front-end consists of HTML, CSS, and JavaScript. This is used to display the map (through an API call) onto the website, as well as navigation, action handling, and information posting.
