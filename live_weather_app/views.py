@@ -188,9 +188,6 @@ def get_place_id(city):
 
 def travel_advisor():
     list_places = []
-    for i in range(5): # TODO: PLS REMOVE LATER THX
-        list_places.append(f"Place {i}")
-    return list_places
     curr_city = city_weather_update["city"]
     city_id = get_place_id(curr_city)
     filters = [ "tourism", "leisure", "activity", "entertainment", "catering" ]
