@@ -190,17 +190,28 @@ def travel_advisor():
     list_places = []
     curr_city = city_weather_update["city"]
     city_id = get_place_id(curr_city)
-    resp = get_places(city_id)
-    #print(json.dumps(resp, indent=2))
-    for i in resp["features"]:
-        try:
-            list_places.append(i["properties"]["name"])
-        except KeyError:
-            continue
+    filters = [ "tourism", "leisure", "activity", "entertainment", "catering" ]
+    for f in filters:
+        resp = get_places(city_id, f)
+        if not resp["features"]: continue
+        else:
+            for i in resp["features"]:
+                try:
+                    list_places.append(i["properties"]["name"])
+                except KeyError:
+                    continue
+            if len(list_places) < 5: continue
+        break
+    # print(f"resp = {resp}")
+    # for i in resp["features"]:
+    #     try:
+    #         list_places.append(i["properties"]["name"])
+    #     except KeyError:
+    #         continue
     return list_places
 
-def get_places(place_id):
+def get_places(place_id, ex):
     apiKey = "09008c734555433dbf212c6c61ebea3b"
-    url = f"https://api.geoapify.com/v2/places?categories=tourism&filter=place:{place_id}&limit=5&apiKey={apiKey}"
+    url = f"https://api.geoapify.com/v2/places?categories={ex}&filter=place:{place_id}&limit=5&apiKey={apiKey}"
     resp = requests.get(url)
     return resp.json()
